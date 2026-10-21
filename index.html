@@ -118,7 +118,35 @@
             <div class="glass-door left"></div>
             <div class="glass-door right"></div>
         </div>
-    </div>
+    </div><!-- 👇 新增：裁切重组可视化 -->
+        <div style="margin-top: 60px; text-align: center; color: #d4af37; width: 100%;">
+            <h2 style="font-size: 28px; margin-bottom: 10px;">传统纹样 · 一画四裁重组</h2>
+            <p style="color: #aa9a8a; margin-bottom: 20px;">沿十字线裁切为四块，各自成画，展现四方连续之美。</p>
+            
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <!-- 裁切示例 1 -->
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: #000; padding: 2px;">
+                        <div style="width: 100px; height: 100px; background-image: url('1.jpg'); background-size: 200% 200%; background-position: top left;"></div>
+                        <div style="width: 100px; height: 100px; background-image: url('1.jpg'); background-size: 200% 200%; background-position: top right;"></div>
+                        <div style="width: 100px; height: 100px; background-image: url('1.jpg'); background-size: 200% 200%; background-position: bottom left;"></div>
+                        <div style="width: 100px; height: 100px; background-image: url('1.jpg'); background-size: 200% 200%; background-position: bottom right;"></div>
+                    </div>
+                    <span style="margin-top: 10px; color: #fff;">凤穿牡丹</span>
+                </div>
+
+                <!-- 裁切示例 2 -->
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: #000; padding: 2px;">
+                        <div style="width: 100px; height: 100px; background-image: url('4.jpg'); background-size: 200% 200%; background-position: top left;"></div>
+                        <div style="width: 100px; height: 100px; background-image: url('4.jpg'); background-size: 200% 200%; background-position: top right;"></div>
+                        <div style="width: 100px; height: 100px; background-image: url('4.jpg'); background-size: 200% 200%; background-position: bottom left;"></div>
+                        <div style="width: 100px; height: 100px; background-image: url('4.jpg'); background-size: 200% 200%; background-position: bottom right;"></div>
+                    </div>
+                    <span style="margin-top: 10px; color: #fff;">喜鹊菱花</span>
+                </div>
+            </div>
+        </div>
 
     <button class="back-btn" onclick="goBack()">← 返回展柜</button>
     <div id="detail-view">
@@ -147,16 +175,14 @@
     <script>
         // 我为你准备了一个超高清的图案代码（基于你发的原图提取的经典元素）
         // 这个代码非常长，不用去网站上转，直接用这个就绝对能出图！
-        const embeddedImage = "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&q=80"; 
-        // (用外链作为第一张演示，因为这个链接绝对不会被拦截)
-
+     
         const tileData = [
             { title: "凤舞牡丹", image: "1.jpg", desc: "凤凰与牡丹交织，寓意富贵吉祥。" },
             { title: "青鸾展翅", image: "2.jpg", desc: "中心对称的青鸾图案，配以祥云与繁花。" },
             { title: "孔雀迎春", image: "3.jpg", desc: "孔雀与玉兰交相辉映，色彩清雅。" },
-            { title: "锦鲤戏莲", image: "4.jpg", desc: "米白底色，双喜鹊对称，生动活泼。" },
+            { title: "双喜临门", image: "4.jpg", desc: "米白底色，双喜鹊对称，生动活泼。" },
             { title: "喜上眉梢", image: "5.jpg", desc: "深绿底色，喜鹊立于梅花枝头。" },
-            { title: "双喜临门", image: "6.jpg", desc: "锦鲤与莲花相映成趣，寓意连年有余。" }
+            { title: "锦鲤戏莲", image: "6.jpg", desc: "锦鲤与莲花相映成趣，寓意连年有余。" }
         ];
 
         const cabinetView = document.getElementById('cabinet-view');
