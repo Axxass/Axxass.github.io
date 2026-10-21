@@ -1,4 +1,175 @@
-<h1>Hello, 这是 Axxass 的网站！</h1>
-<h1>娘惹风格瓷砖</h1>
-<p>这是娘惹风格的拥有中国传统花纹的并且可以四方连续的瓷砖图。</p>
-<img src="https://github.com/Axxass/Axxass.github.io/blob/main/IMG_5806.png?raw=true" width="100%" alt="娘惹瓷砖图">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>娘惹风格瓷砖 - 浮雕渲染</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body { font-family: 'PingFang SC', sans-serif; background-color: #121212; color: #fff; text-align: center; margin: 0; padding: 40px 20px; }
+        h1 { color: #ff007f; font-size: 36px; margin-bottom: 10px; }
+        p.subtitle { color: #aaaaaa; font-size: 18px; margin-bottom: 40px; }
+        .container { max-width: 800px; margin: 0 auto; background-color: #1e1e1e; border-radius: 16px; padding: 40px 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .section-title { font-size: 24px; margin-top: 40px; margin-bottom: 10px; }
+        .section-desc { color: #888; font-size: 14px; margin-bottom: 20px; }
+        
+        /* 1. 单元瓷砖 */
+        .single-tile {
+            width: 250px; height: 250px; margin: 0 auto;
+            background-image: url('IMG_5806.PNG'); background-size: cover; border: 4px solid #333; border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        /* 2. 角耦合阵列 */
+        .coupling-wall {
+            width: 100%; max-width: 600px; height: 250px; margin: 0 auto;
+            border: 4px solid #333; border-radius: 8px; overflow: hidden;
+            background-image: url('IMG_5806.PNG');
+            background-size: 125px 125px; background-repeat: repeat; position: relative;
+        }
+        .coupling-wall::after {
+            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background-image: url('IMG_5806.PNG'); background-size: 125px 125px;
+            transform: rotate(45deg); opacity: 0.6; mix-blend-mode: multiply;
+        }
+
+        /* 3. 3D 渲染区域 */
+        #canvas-container {
+            width: 100%; max-width: 600px; height: 400px; margin: 0 auto;
+            background-color: #0a0a0a; border-radius: 8px; border: 2px solid #333;
+            cursor: grab; position: relative; box-shadow: inset 0 0 50px rgba(0,0,0,1);
+        }
+        #canvas-container:active { cursor: grabbing; }
+    </style>
+</head>
+<body>
+    <h1>南洋风韵 · 中式匠心</h1>
+    <p class="subtitle">AIGC 驱动的娘惹风格 — 角耦合与 3D 浮雕渲染</p>
+
+    <div class="container">
+        <!-- 第一部分：单元图 -->
+        <h2 class="section-title">单元瓷砖设计</h2>
+        <div class="single-tile"></div>
+
+        <!-- 第二部分：角耦合阵列 -->
+        <h2 class="section-title">角耦合（Corner Coupling）无缝阵列</h2>
+        <p class="section-desc">交错旋转叠加，展示更高阶的四方连续结构</p>
+        <div class="coupling-wall"></div>
+
+        <!-- 第三部分：3D 浮雕渲染 -->
+        <h2 class="section-title">3D 高精度浮雕渲染</h2>
+        <p class="section-desc">🖱️ 拖拽旋转，滚轮缩放，体验真实光影与凹凸质感</p>
+        <div id="canvas-container"></div>
+    </div>
+
+    <script>
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+        camera.position.set(0, 0, 5);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        container.appendChild(renderer.domElement);
+
+        // 灯光（调暗并侧向打光，让浮雕更清晰）
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        const dirLight = new THREE.DirectionalLight(0xffffff, 0.6);
+        dirLight.position.set(-2, 3, 4); 
+        scene.add(dirLight);
+
+        const textureLoader = new THREE.TextureLoader();
+        
+        // 加载本地图片
+        textureLoader.load('IMG_5806.PNG', 
+            function(texture) {
+                // 成功加载图片
+                create3DTile(texture);
+            },
+            undefined,
+            function(err) {
+                // 如果本地拦截，生成一个灰色底板模型，保证你能看到3D旋转
+                console.warn("本地加载受限，启用纯色模型展示。");
+                const canvas = document.createElement('canvas');
+                canvas.width = 512; canvas.height = 512;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = '#e0e0e0'; 
+                ctx.fillRect(0, 0, 512, 512);
+                const fallbackTexture = new THREE.CanvasTexture(canvas);
+                create3DTile(fallbackTexture);
+            }
+        );
+
+        function create3DTile(texture) {
+            // 动态生成浮雕法线（提取图片灰度）
+            const canvas = document.createElement('canvas');
+            canvas.width = 512; canvas.height = 512;
+            const ctx = canvas.getContext('2d');
+            if (texture.image && texture.image.width) {
+                ctx.drawImage(texture.image, 0, 0, 512, 512);
+            } else {
+                ctx.fillStyle = '#ccc'; ctx.fillRect(0,0,512,512);
+            }
+            
+            const imgData = ctx.getImageData(0, 0, 512, 512);
+            const data = imgData.data;
+            for (let i = 0; i < data.length; i += 4) {
+                const avg = (data[i] + data[i+1] + data[i+2]) / 3;
+                data[i] = avg; data[i+1] = avg; data[i+2] = avg; 
+            }
+            ctx.putImageData(imgData, 0, 0);
+            const bumpTexture = new THREE.CanvasTexture(canvas);
+
+            // 材质（带浮雕）
+            const materialFace = new THREE.MeshStandardMaterial({ 
+                map: texture,
+                bumpMap: bumpTexture,
+                bumpScale: 0.08, // 浮雕深度
+                roughness: 0.4
+            });
+            const materialSide = new THREE.MeshStandardMaterial({ color: 0xffffff });
+
+            // 加厚几何体
+            const geometry = new THREE.BoxGeometry(2.5, 2.5, 0.3); 
+            const materials = [
+                materialSide, materialSide, materialSide, materialSide, 
+                materialFace, materialFace
+            ];
+
+            const tile = new THREE.Mesh(geometry, materials);
+            scene.add(tile);
+
+            // 交互控制
+            let isDragging = false;
+            let previousMousePosition = { x: 0, y: 0 };
+
+            container.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                previousMousePosition = { x: e.clientX, y: e.clientY };
+            });
+            window.addEventListener('mouseup', () => { isDragging = false; });
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const deltaX = e.clientX - previousMousePosition.x;
+                const deltaY = e.clientY - previousMousePosition.y;
+                tile.rotation.y += deltaX * 0.01;
+                tile.rotation.x += deltaY * 0.01;
+                previousMousePosition = { x: e.clientX, y: e.clientY };
+            });
+            container.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                camera.position.z += e.deltaY * 0.005;
+                if (camera.position.z < 2.5) camera.position.z = 2.5;
+                if (camera.position.z > 8) camera.position.z = 8;
+            }, { passive: false });
+
+            function animate() {
+                requestAnimationFrame(animate);
+                renderer.render(scene, camera);
+            }
+            animate();
+        }
+    </script>
+</body>
+</html>
