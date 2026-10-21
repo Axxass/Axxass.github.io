@@ -91,6 +91,14 @@
         .feature-list li::before { content: "✦"; color: #d4af37; margin-right: 8px; }
         .tag { display: inline-block; background: #3e2a1e; padding: 5px 12px; border-radius: 20px; font-size: 14px; color: #d4af37; margin-right: 10px; border: 1px solid #5a4333; }
 
+        .action-btn {
+            margin-top: 20px; padding: 12px 30px; background: #d4af37; color: #1a110b;
+            border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer;
+            transition: 0.3s; box-shadow: 0 4px 15px rgba(212,175,55,0.4);
+        }
+        .action-btn:hover { background: #fff; transform: scale(1.05); }
+        .action-btn:disabled { background: #555; color: #888; cursor: not-allowed; transform: none; }
+
         @media (max-width: 768px) {
             h1 { font-size: 32px; }
             .cabinet { height: 500px; border-width: 12px; }
@@ -110,6 +118,7 @@
         <p class="subtitle">AIGC 娘惹风格瓷砖 · 沉浸式展柜</p>
     </header>
 
+    <!-- 视图 1：红木展柜 -->
     <div class="cabinet-wrapper" id="cabinet-view">
         <button class="open-btn" id="openBtn" onclick="openCabinet()">✨ 开启展柜</button>
         
@@ -118,36 +127,9 @@
             <div class="glass-door left"></div>
             <div class="glass-door right"></div>
         </div>
-    </div><!-- 👇 新增：裁切重组可视化 -->
-        <div style="margin-top: 60px; text-align: center; color: #d4af37; width: 100%;">
-            <h2 style="font-size: 28px; margin-bottom: 10px;">传统纹样 · 一画四裁重组</h2>
-            <p style="color: #aa9a8a; margin-bottom: 20px;">沿十字线裁切为四块，各自成画，展现四方连续之美。</p>
-            
-            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-                <!-- 裁切示例 1 -->
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: #000; padding: 2px;">
-                        <div style="width: 100px; height: 100px; background-image: url('1.jpg'); background-size: 200% 200%; background-position: top left;"></div>
-                        <div style="width: 100px; height: 100px; background-image: url('1.jpg'); background-size: 200% 200%; background-position: top right;"></div>
-                        <div style="width: 100px; height: 100px; background-image: url('1.jpg'); background-size: 200% 200%; background-position: bottom left;"></div>
-                        <div style="width: 100px; height: 100px; background-image: url('1.jpg'); background-size: 200% 200%; background-position: bottom right;"></div>
-                    </div>
-                    <span style="margin-top: 10px; color: #fff;">凤穿牡丹</span>
-                </div>
+    </div>
 
-                <!-- 裁切示例 2 -->
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: #000; padding: 2px;">
-                        <div style="width: 100px; height: 100px; background-image: url('4.jpg'); background-size: 200% 200%; background-position: top left;"></div>
-                        <div style="width: 100px; height: 100px; background-image: url('4.jpg'); background-size: 200% 200%; background-position: top right;"></div>
-                        <div style="width: 100px; height: 100px; background-image: url('4.jpg'); background-size: 200% 200%; background-position: bottom left;"></div>
-                        <div style="width: 100px; height: 100px; background-image: url('4.jpg'); background-size: 200% 200%; background-position: bottom right;"></div>
-                    </div>
-                    <span style="margin-top: 10px; color: #fff;">喜鹊菱花</span>
-                </div>
-            </div>
-        </div>
-
+    <!-- 视图 2：单品 3D 详情 -->
     <button class="back-btn" onclick="goBack()">← 返回展柜</button>
     <div id="detail-view">
         <div class="left-3d" id="canvas-container"></div>
@@ -159,30 +141,27 @@
                 <span class="tag">3D 浮雕渲染</span>
             </div>
             <p class="desc-text" id="detail-desc">这里是瓷砖的简介介绍...</p>
-            <ul class="feature-list">
-                <li>采用前沿 AIGC 算法，精准提取中式传统纹样特征。</li>
-                <li>完美融入南洋娘惹文化的高饱和度撞色美学。</li>
-                <li>基于 Three.js 引擎的物理材质重建，光影灵动。</li>
-                <li>支持四方连续无缝拼接，满足现代化工程铺贴需求。</li>
-            </ul>
-            <p style="color: #888; font-size: 14px; margin-top: 30px;">🖱️ 鼠标拖拽 / 手指滑动旋转 360° 查看浮雕细节</p>
+            
+            <button id="rebuildBtn" class="action-btn" onclick="triggerRebuild()">🔄 对称重组变形</button>
+            <p id="btn-status" style="color: #d4af37; font-size: 14px; margin-top: 10px; height: 20px;"></p>
+
+            <p style="color: #888; font-size: 14px; margin-top: 15px;">🖱️ 鼠标拖拽 / 手指滑动旋转 360°</p>
         </div>
     </div>
 
+    <!-- 音效 -->
     <audio id="doorSound" src="https://assets.mixkit.co/active_storage/sfx/2043/2043-preview.mp3"></audio>
     <audio id="bgMusic" src="https://cdn.pixabay.com/audio/2022/01/18/audio_d0c6ff1bab.mp3" loop></audio>
 
     <script>
-        // 我为你准备了一个超高清的图案代码（基于你发的原图提取的经典元素）
-        // 这个代码非常长，不用去网站上转，直接用这个就绝对能出图！
-     
+        // 6 张图的完整数据
         const tileData = [
-            { title: "凤舞牡丹", image: "1.jpg", desc: "凤凰与牡丹交织，寓意富贵吉祥。" },
-            { title: "青鸾展翅", image: "2.jpg", desc: "中心对称的青鸾图案，配以祥云与繁花。" },
-            { title: "孔雀迎春", image: "3.jpg", desc: "孔雀与玉兰交相辉映，色彩清雅。" },
-            { title: "双喜临门", image: "4.jpg", desc: "米白底色，双喜鹊对称，生动活泼。" },
-            { title: "喜上眉梢", image: "5.jpg", desc: "深绿底色，喜鹊立于梅花枝头。" },
-            { title: "锦鲤戏莲", image: "6.jpg", desc: "锦鲤与莲花相映成趣，寓意连年有余。" }
+            { title: "锦鸡玉兰 · 四角合花", image: "1.jpg", desc: "提取传统娘惹瓷中最经典的翠绿基调与粉彩描金技法。本件采用“角耦合”设计逻辑，将画面解构为四个象限。正序拼合时，一对锦鸡在中心形成完美的镜像对称，长尾交织，四周环绕着洁白的玉兰与繁茂的枝蔓。锦鸡象征“锦绣前程”，玉兰代表“玉堂富贵”，两者结合，寓意家业兴旺、满堂生辉。通过数字重构，使传统南洋花鸟图纹具备了现代拼图般的解构美学。" },
+            { title: "凤穿牡丹 · 蝶恋花境", image: "2.jpg", desc: "娘惹瓷嫁妆器物最具标志性的经典题材。画面中央，一对凤凰双翼舒展，尾羽如孔雀般华丽下垂，与四周肥厚饱满的牡丹花交相辉映。作品巧妙融入了蝴蝶作为视觉引导线，形成“蝶恋花”的生动情境。四角的牡丹与凤凰的局部在中心交汇，取「凤穿牡丹」之意。寓意婚姻美满、富贵吉祥。本件通过数字算法重建了粉彩的温润光泽，完美呈现了南洋峇峇娘惹文化的繁复与华丽。" },
+            { title: "仙鹤秋菊 · 祥云开光", image: "3.jpg", desc: "以经典娘惹瓷绿为底色，中心描绘一只展翅高飞的仙鹤，四周辅以红黄相间的繁盛秋菊与如意祥云。仙鹤在正中心形成完美的轴对称，须弥座般的菊花开光框定四周，极具神圣感与仪式感。作为传统婚嫁与寿诞的常用纹样，“仙鹤+秋菊”取“鹤寿延年”之意，象征长寿与安康。本件利用角耦合原理，将整体图纹巧妙地散布在四个象限，切割重排后依然能形成万花筒般的视觉张力。" },
+            { title: "喜上梅梢 · 四方连缀", image: "4.jpg", desc: "不同于常见的深色釉底，此款以温润的米白为地。画面采用十字对称布局，四只蓝白相间的喜鹊两两对望、轻盈立于折枝梅花之上，身姿灵动。角隅处点缀红蓝相间的硕大牡丹与卷草纹，色彩明快。整体取「喜上眉梢」之美意，构图疏密有致，尽显东方花鸟画的雅趣。本件采用高精度数字建模，重现传统粉彩的细腻线条，表面辅以微浮雕与亮釉质感渲染，使古典瓷面焕发新生。" },
+            { title: "喜鹊报春 · 菱花团花", image: "5.jpg", desc: "作为娘惹嫁妆瓷器中的经典之作，此件作品以深邃孔雀绿为地。画面正中构筑端庄的几何菱形花簇，四只蓝白相间的喜鹊灵动环绕，穿梭栖息于繁茂的缠枝牡丹之间。整幅图景不仅传递出“四喜临门”与“花开富贵”的吉祥祈愿，更寄托了婚姻美满、家族昌盛的祝福。工艺上，将平面纹样重塑为立体浮雕，并以清漆涂层逼真还原了传统粉彩的温润光泽。" },
+            { title: "锦鲤穿花 · 十字团花", image: "6.jpg", desc: "娘惹瓷嫁妆器物的经典题材。画面以温润白釉为地，四尾红鲤灵动游弋于蓝色水波与绿意之间，四角点缀肥厚饱满的粉彩牡丹，配以清雅荷花。取「连年有余」与「花开富贵」之意，寓意家业丰盈、婚姻美满。本件通过数字重建重塑纹样层次，表面施以浮雕与清漆亮釉，完美复现传统粉彩瓷器的温润光泽与立体触感。" }
         ];
 
         const cabinetView = document.getElementById('cabinet-view');
@@ -191,6 +170,9 @@
         let tileMesh;
         let isModelInitialized = false;
         let isOpened = false;
+        let currentImage = null;
+        let isAnimating = false; // 控制重组动画时的状态
+        let isDragging = false; // 控制拖拽状态
 
         function renderCabinet() {
             shelfContainer.innerHTML = '';
@@ -216,16 +198,21 @@
         }
 
         function openDetail(item) {
+            currentImage = item.image;
             cabinetView.style.display = 'none'; 
             detailView.style.display = 'flex';  
             document.getElementById('detail-title').innerText = item.title;
             document.getElementById('detail-desc').innerText = item.desc;
 
+            // 重置按钮状态
+            document.getElementById('rebuildBtn').disabled = false;
+            document.getElementById('btn-status').innerText = "";
+
             if (!isModelInitialized) {
                 init3D(item.image);
                 isModelInitialized = true;
             } else {
-                loadTexture(item.image);
+                load3DTexture(item.image, true);
             }
         }
 
@@ -247,20 +234,25 @@
             renderer.domElement.style.touchAction = 'none';
             container.appendChild(renderer.domElement);
 
-            scene.add(new THREE.AmbientLight(0xffffff, 1.0));
-            const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-            dirLight.position.set(-5, 5, 5); 
-            scene.add(dirLight);
+            // 强侧光，让浮雕立体感拉满
+            scene.add(new THREE.AmbientLight(0xffffff, 0.5)); 
+            const mainLight = new THREE.DirectionalLight(0xffeedd, 0.9); 
+            mainLight.position.set(5, 5, 10); 
+            scene.add(mainLight);
+            const backLight = new THREE.DirectionalLight(0xd4af37, 0.4); 
+            backLight.position.set(-5, -5, -10);
+            scene.add(backLight);
 
             const geometry = new THREE.BoxGeometry(3, 3, 0.3); 
             const material = new THREE.MeshStandardMaterial({ color: 0x888888 });
-            tileMesh = new THREE.Mesh(geometry, [material, material, material, material, material, material]);
+           const edgeMaterial = new THREE.MeshStandardMaterial({ color: 0xf0f0f0, roughness: 0.8 }); // 陶瓷白边
+            const defaultFace = new THREE.MeshStandardMaterial({ color: 0x888888 }); // 正面初始灰色
+            tileMesh = new THREE.Mesh(geometry, [edgeMaterial, edgeMaterial, edgeMaterial, edgeMaterial, defaultFace, defaultFace]);
             tileMesh.rotation.x = 0.1;
             scene.add(tileMesh);
 
-            loadTexture(initialImage);
+            load3DTexture(initialImage);
 
-            let isDragging = false;
             let previousMousePosition = { x: 0, y: 0 };
             
             container.addEventListener('mousedown', (e) => { isDragging = true; previousMousePosition = { x: e.clientX, y: e.clientY }; });
@@ -291,7 +283,7 @@
 
             function animate() {
                 requestAnimationFrame(animate);
-                if (tileMesh && !isDragging) {
+                if (tileMesh && !isDragging && !isAnimating) {
                     tileMesh.rotation.y += 0.005; 
                 }
                 renderer.render(scene, camera);
@@ -299,24 +291,127 @@
             animate();
         }
 
-        function loadTexture(imageName) {
+        // 初始加载图片，带灰度浮雕生成
+        function load3DTexture(imageName, isNew = false) {
             const textureLoader = new THREE.TextureLoader();
             textureLoader.crossOrigin = 'Anonymous'; 
-
             textureLoader.load(imageName, 
                 function(texture) {
                     texture.minFilter = THREE.LinearFilter;
-                    // 强制给6个面贴图！
-                    const material = new THREE.MeshBasicMaterial({ map: texture });
-                    if (tileMesh) {
-                        tileMesh.material = [material, material, material, material, material, material];
+                    texture.magFilter = THREE.LinearFilter;
+                    
+                    const canvas = document.createElement('canvas');
+                    canvas.width = 512; canvas.height = 512;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(texture.image, 0, 0, 512, 512);
+                    const imgData = ctx.getImageData(0, 0, 512, 512);
+                    const data = imgData.data;
+                    for (let i = 0; i < data.length; i += 4) {
+                        const avg = (data[i] + data[i+1] + data[i+2]) / 3;
+                        data[i] = avg; data[i+1] = avg; data[i+2] = avg; 
                     }
-                },
-                undefined,
-                function(err) {
-                    console.warn("原图加载失败");
+                    ctx.putImageData(imgData, 0, 0);
+                    const bumpTexture = new THREE.CanvasTexture(canvas);
+
+                    const material = new THREE.MeshStandardMaterial({ 
+                        map: texture, 
+                        bumpMap: bumpTexture, 
+                        bumpScale: 0.15, 
+                        roughness: 0.3,
+                        metalness: 0.1
+                    });
+                    
+                    if (tileMesh) {
+                       const edgeMaterial = new THREE.MeshStandardMaterial({ color: 0xf0f0f0, roughness: 0.8 });
+                        tileMesh.material = [edgeMaterial, edgeMaterial, edgeMaterial, edgeMaterial, material, material];
+                        if (isNew) tileMesh.scale.set(0.8, 0.8, 0.8);
+                    }
                 }
             );
+        }
+
+        // 触发重组（带暂停、可视化计算、浮雕更新、恢复旋转）
+        function triggerRebuild() {
+            if (isAnimating || !currentImage) return;
+            isAnimating = true;
+            
+            const btn = document.getElementById('rebuildBtn');
+            const statusText = document.getElementById('btn-status');
+            btn.disabled = true;
+            statusText.innerText = "🧩 正在对称计算与重组...";
+
+            // 暂停并转到正面
+            if(tileMesh) {
+                tileMesh.rotation.y = 0;
+                tileMesh.rotation.x = 0.1;
+            }
+
+            const img = new Image();
+            img.crossOrigin = "Anonymous";
+            img.src = currentImage;
+            
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                canvas.width = 512; canvas.height = 512;
+                const ctx = canvas.getContext('2d');
+                const w = img.width / 2;
+                const h = img.height / 2;
+
+                // 四种对称规律
+                const patterns = [
+                    [[0,0], [w,0], [0,h], [w,h]], // 原图
+                    [[w,0], [0,0], [w,h], [0,h]], // 水平镜像
+                    [[0,h], [w,h], [0,0], [w,0]], // 垂直镜像
+                    [[w,h], [0,h], [w,0], [0,0]]  // 中心对称
+                ];
+                const p = patterns[Math.floor(Math.random() * patterns.length)];
+
+                // 画布重组
+                ctx.drawImage(img, p[0][0], p[0][1], w, h, 0, 0, 256, 256);
+                ctx.drawImage(img, p[1][0], p[1][1], w, h, 256, 0, 256, 256);
+                ctx.drawImage(img, p[2][0], p[2][1], w, h, 0, 256, 256, 256);
+                ctx.drawImage(img, p[3][0], p[3][1], w, h, 256, 256, 256, 256);
+
+                setTimeout(() => {
+                    const newTexture = new THREE.CanvasTexture(canvas);
+                    
+                    // 生成新图案的灰度浮雕
+                    const bumpCanvas = document.createElement('canvas');
+                    bumpCanvas.width = 512; bumpCanvas.height = 512;
+                    const bctx = bumpCanvas.getContext('2d');
+                    bctx.drawImage(canvas, 0, 0);
+                    const bImgData = bctx.getImageData(0, 0, 512, 512);
+                    const bData = bImgData.data;
+                    for (let i = 0; i < bData.length; i += 4) {
+                        const avg = (bData[i] + bData[i+1] + bData[i+2]) / 3;
+                        bData[i] = avg; bData[i+1] = avg; bData[i+2] = avg; 
+                    }
+                    bctx.putImageData(bImgData, 0, 0);
+                    const newBump = new THREE.CanvasTexture(bumpCanvas);
+
+                    // 应用新材质（带正确浮雕）
+                    const newMaterial = new THREE.MeshStandardMaterial({ 
+                        map: newTexture, 
+                        bumpMap: newBump, 
+                        bumpScale: 0.15, 
+                        roughness: 0.3,
+                        metalness: 0.1
+                    });
+
+                    if (tileMesh) {
+                       const edgeMaterial = new THREE.MeshStandardMaterial({ color: 0xf0f0f0, roughness: 0.8 });
+                        tileMesh.material = [edgeMaterial, edgeMaterial, edgeMaterial, edgeMaterial, newMaterial, newMaterial];
+                        tileMesh.scale.set(1.1, 1.1, 1.1);
+                        setTimeout(() => { tileMesh.scale.set(1, 1, 1); }, 200);
+                    }
+
+                    statusText.innerText = "✅ 重组完成！浮雕已更新。";
+                    setTimeout(() => { statusText.innerText = ""; }, 2000);
+                    
+                    btn.disabled = false;
+                    isAnimating = false; // 恢复旋转
+                }, 800); // 0.8秒展示计算过程
+            };
         }
 
         renderCabinet();
