@@ -75,7 +75,7 @@
         .cabinet.opened .glass-door.left { transform: rotateY(-110deg); }
         .cabinet.opened .glass-door.right { transform: rotateY(110deg); }
 
-        #detail-view {
+ #detail-view {
             display: none; max-width: 1100px; margin: 0 auto; padding: 20px;
             flex-direction: row; gap: 40px; align-items: center;
         }
@@ -95,44 +95,23 @@
         .right-info { flex: 1; }
         .right-info h2 { color: #d4af37; font-size: 32px; margin-bottom: 20px; border-bottom: 1px solid #5a4333; padding-bottom: 10px; }
         
-        /* 长文样式（一直固定在底下） */
+        /* 长文样式 */
         .desc-text { color: #4a3324; font-size: 15px; line-height: 1.7; text-align: justify; margin-top: 25px; border-top: 1px dashed #d4af37; padding-top: 20px;}
         
-        /* 四个标签按钮 */
+        /* 标签按钮 */
         .tag { 
-            display: inline-block; 
-            background: #3e2a1e; 
-            padding: 8px 20px; 
-            border-radius: 30px; 
-            font-size: 15px; 
-            color: #d4af37; 
-            margin-right: 10px; 
-            border: 1px solid #5a4333; 
-            cursor: pointer; 
-            transition: all 0.3s; 
-            font-weight: bold;
+            display: inline-block; background: #3e2a1e; padding: 8px 20px; border-radius: 30px; 
+            font-size: 15px; color: #d4af37; margin-right: 10px; border: 1px solid #5a4333; 
+            cursor: pointer; transition: all 0.3s; font-weight: bold;
         }
-        .tag:hover, .tag.active { 
-            background: #d4af37; 
-            color: #1a110b; 
-            box-shadow: 0 0 15px rgba(212,175,55,0.5); 
-            transform: translateY(-2px);
-        }
+        .tag:hover, .tag.active { background: #d4af37; color: #1a110b; box-shadow: 0 0 15px rgba(212,175,55,0.5); transform: translateY(-2px); }
 
-        /* 点击后出现的短句区域（位于按钮下方，长文上方） */
+        /* 高亮短句区域 */
         #short-desc-box {
-            margin-top: 15px;
-            padding: 15px;
-            background: rgba(212, 175, 55, 0.15);
-            border-left: 4px solid #d4af37;
-            border-radius: 0 8px 8px 0;
-            color: #8b0000;
-            font-size: 16px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            min-height: 50px;
-            display: flex;
-            align-items: center;
+            margin-top: 15px; padding: 15px; background: rgba(212, 175, 55, 0.15);
+            border-left: 4px solid #d4af37; border-radius: 0 8px 8px 0;
+            color: #8b0000; font-size: 16px; font-weight: bold; letter-spacing: 1px;
+            min-height: 50px; display: flex; align-items: center;
         }
 
         .action-btn {
@@ -157,12 +136,12 @@
 </head>
 <body>
 
-    <!-- 娘惹背景介绍弹窗 -->
-    <div id="intro-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(26, 17, 11, 0.5); z-index: 999; justify-content: center; align-items: center; backdrop-filter: blur(4px);">
-        <div style="background: rgba(253, 250, 245, 0.88); width: 90%; max-width: 600px; border: 3px solid #d4af37; border-radius: 16px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); position: relative;">
-            <div onclick="closeIntro()" style="position: absolute; top: 15px; right: 20px; font-size: 28px; color: #8b6b4a; cursor: pointer; font-weight: bold;">×</div>
+    <!-- 👇 修复后的阅读背景弹窗 -->
+    <div id="intro-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(26, 17, 11, 0.6); z-index: 99999; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
+        <div style="background: #fdfaf5; width: 90%; max-width: 600px; border: 3px solid #d4af37; border-radius: 16px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); position: relative;">
+            <div onclick="closeIntro()" style="position: absolute; top: 15px; right: 20px; font-size: 28px; color: #8b6b4a; cursor: pointer; font-weight: bold; transition: 0.3s;" onmouseover="this.style.color='#d4af37'" onmouseout="this.style.color='#8b6b4a'">×</div>
             
-            <h2 style="color: #8b0000; margin-bottom: 20px; text-align: center; border-bottom: 1px solid #d4af37; padding-bottom: 10px;">娘惹文化与角耦合美学</h2>
+            <h2 style="color: #8b0000; margin-bottom: 20px; text-align: center; border-bottom: 2px solid #d4af37; padding-bottom: 10px;">娘惹文化与角耦合美学</h2>
             
             <p style="color: #4a3324; font-size: 16px; line-height: 1.8; margin-bottom: 15px; text-align: justify;">
                 <b>娘惹文化 (Peranakan)：</b> 是早期华人移民与东南亚土著文化交融的结晶。娘惹瓷砖（Nyonya Tiles）以其大胆的翠绿、粉红撞色和繁复的吉祥纹样（如凤凰、牡丹）闻名，常见于南洋老宅的墙面与地面。
@@ -219,11 +198,15 @@
     <audio id="bgMusic" src="bgm.mp3" loop></audio>
 
     <script>
-        // 控制介绍面板的显示与隐藏
-        function openIntro() { document.getElementById('intro-modal').style.display = 'flex'; }
-        function closeIntro() { document.getElementById('intro-modal').style.display = 'none'; }
+        // 弹窗控制函数
+        function openIntro() { 
+            document.getElementById('intro-modal').style.display = 'flex'; 
+        }
+        function closeIntro() { 
+            document.getElementById('intro-modal').style.display = 'none'; 
+        }
 
-        // 数据源：包含长文(desc)，以及四维度短句
+        // 数据源
         const tileData = [
             { 
                 title: "锦鸡玉兰 · 四角合花", image: "1.jpg", 
@@ -290,7 +273,6 @@
             }
         }
 
-        // 默认显示长文，上方高亮短句
         function openDetail(item) {
             currentImage = item.image;
             cabinetView.style.display = 'none'; 
@@ -319,7 +301,6 @@
             }
         }
 
-        // 点击标签，高亮短句变化，长文不动
         function switchTab(element, text) {
             const tags = document.querySelectorAll('#tag-container .tag');
             tags.forEach(tag => tag.classList.remove('active'));
