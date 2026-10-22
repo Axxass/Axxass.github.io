@@ -95,17 +95,10 @@
         .right-info { flex: 1; }
         .right-info h2 { color: #d4af37; font-size: 32px; margin-bottom: 20px; border-bottom: 1px solid #5a4333; padding-bottom: 10px; }
         
-        .desc-text { 
-            color: #4a3324; 
-            font-size: 16px; 
-            line-height: 1.8; 
-            margin-bottom: 15px; 
-            text-align: justify; 
-            /* 增加一点最小高度，防止切换文字时页面上下跳动 */
-            min-height: 150px; 
-        }
+        /* 长文样式（保持不变） */
+        .desc-text { color: #4a3324; font-size: 15px; line-height: 1.7; text-align: justify; margin-top: 25px;}
         
-        /* 👇 交互按钮样式 */
+        /* 👇 四个标签按钮的样式 */
         .tag { 
             display: inline-block; 
             background: #3e2a1e; 
@@ -124,6 +117,22 @@
             color: #1a110b; 
             box-shadow: 0 0 15px rgba(212,175,55,0.5); 
             transform: translateY(-2px);
+        }
+
+        /* 👇 点击后出现的高亮短句区域 */
+        #short-desc-box {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid #d4af37;
+            border-radius: 0 8px 8px 0;
+            color: #8b0000;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
         }
 
         .action-btn {
@@ -148,32 +157,11 @@
 </head>
 <body>
 
-    <!-- 娘惹背景介绍弹窗 -->
-    <div id="intro-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(26, 17, 11, 0.5); z-index: 999; justify-content: center; align-items: center; backdrop-filter: blur(4px);">
-        <div style="background: rgba(253, 250, 245, 0.88); width: 90%; max-width: 600px; border: 3px solid #d4af37; border-radius: 16px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); position: relative;">
-            <div onclick="closeIntro()" style="position: absolute; top: 15px; right: 20px; font-size: 28px; color: #8b6b4a; cursor: pointer; font-weight: bold;">×</div>
-            
-            <h2 style="color: #8b0000; margin-bottom: 20px; text-align: center; border-bottom: 1px solid #d4af37; padding-bottom: 10px;">娘惹文化与角耦合美学</h2>
-            
-            <p style="color: #4a3324; font-size: 16px; line-height: 1.8; margin-bottom: 15px; text-align: justify;">
-                <b>娘惹文化 (Peranakan)：</b> 是早期华人移民与东南亚土著文化交融的结晶。娘惹瓷砖（Nyonya Tiles）以其大胆的翠绿、粉红撞色和繁复的吉祥纹样（如凤凰、牡丹）闻名，常见于南洋老宅的墙面与地面。
-            </p>
-            <p style="color: #4a3324; font-size: 16px; line-height: 1.8; margin-bottom: 30px; text-align: justify;">
-                <b>四角耦合 (Corner Coupling)：</b> 是一种进阶的四方连续设计逻辑。将单块正方形的四个角分别与其他四块拼接，打破传统的横平竖直，形成万花筒般的对称镜像。本展陈通过 AI 生成与算法解构，重现了这种极具数学秩序的古典美。
-            </p>
-
-            <div style="text-align: center;">
-                <button onclick="closeIntro()" style="padding: 12px 50px; background: #d4af37; color: #1a110b; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(212,175,55,0.4);">确 认</button>
-            </div>
-        </div>
-    </div>
-
     <header>
         <h1>隅合万象</h1>
         <p class="subtitle">四角耦合娘惹瓷纹样 · 数字展陈系列作品</p>
     </header>
 
-    <!-- 视图 1：红木展柜 -->
     <div class="cabinet-wrapper" id="cabinet-view">
         <div style="display: flex; gap: 15px;">
             <button class="open-btn" id="openBtn" onclick="openCabinet()" style="margin-bottom: 20px;">✨ 开启展柜</button>
@@ -187,17 +175,19 @@
         </div>
     </div>
 
-    <!-- 视图 2：单品 3D 详情 -->
     <button class="back-btn" onclick="goBack()">← 返回展柜</button>
     <div id="detail-view">
         <div class="left-3d" id="canvas-container"></div>
         <div class="right-info">
             <h2 id="detail-title">瓷砖名称</h2>
             
-            <!-- 按钮容器 -->
-            <div id="tag-container" style="margin-bottom: 20px;"></div>
+            <!-- 1. 按钮区域 -->
+            <div id="tag-container" style="margin-bottom: 15px;"></div>
             
-            <!-- 文字容器（默认加载长文） -->
+            <!-- 2. 动态高亮短句区域（位于按钮下方，长文上方） -->
+            <div id="short-desc-box">👆 请点击上方标签查看专业维度的拆解</div>
+            
+            <!-- 3. 永远不动的长文区域 -->
             <p class="desc-text" id="detail-desc">长文介绍加载中...</p>
             
             <button id="rebuildBtn" class="action-btn" onclick="triggerRebuild()">🔄 对称重组变形</button>
@@ -207,69 +197,44 @@
         </div>
     </div>
 
-    <!-- 音效 -->
     <audio id="doorSound" src="https://assets.mixkit.co/active_storage/sfx/2043/2043-preview.mp3"></audio>
     <audio id="bgMusic" src="bgm.mp3" loop></audio>
 
     <script>
+        // 模态框控制
         function openIntro() { document.getElementById('intro-modal').style.display = 'flex'; }
         function closeIntro() { document.getElementById('intro-modal').style.display = 'none'; }
 
-        // 数据源：包含长文(desc)，以及四维度短句
         const tileData = [
             { 
-                title: "锦鸡玉兰 · 四角合花", 
-                image: "1.jpg", 
+                title: "锦鸡玉兰 · 四角合花", image: "1.jpg", 
                 desc: "提取传统娘惹瓷中最经典的翠绿基调与粉彩描金技法。本件采用“角耦合”设计逻辑，将画面解构为四个象限。正序拼合时，一对锦鸡在中心形成完美的镜像对称，长尾交织，四周环绕着洁白的玉兰与繁茂的枝蔓。锦鸡象征“锦绣前程”，玉兰代表“玉堂富贵”，两者结合，寓意家业兴旺、满堂生辉。通过数字重构，使传统南洋花鸟图纹具备了现代拼图般的解构美学。",
-                工艺: "粉彩平涂 · 矩阵切割重建", 
-                纹样: "锦绣满堂（一对锦鸡 + 折枝玉兰 + 缠枝藤蔓）", 
-                形制: "四方耦合拼图（Quadrant Coupling）", 
-                寓意: "锦绣前程 · 玉堂富贵" 
+                工艺: "粉彩平涂 · 矩阵切割重建", 纹样: "锦绣满堂（一对锦鸡 + 折枝玉兰 + 缠枝藤蔓）", 形制: "四方耦合拼图（Quadrant Coupling）", 寓意: "锦绣前程 · 玉堂富贵" 
             },
             { 
-                title: "凤穿牡丹 · 蝶恋花境", 
-                image: "2.jpg", 
+                title: "凤穿牡丹 · 蝶恋花境", image: "2.jpg", 
                 desc: "娘惹瓷嫁妆器物最具标志性的经典题材。画面中央，一对凤凰双翼舒展，尾羽如孔雀般华丽下垂，与四周肥厚饱满的牡丹花交相辉映。作品巧妙融入了蝴蝶作为视觉引导线，形成“蝶恋花”的生动情境。四角的牡丹与凤凰的局部在中心交汇，取「凤穿牡丹」之意。寓意婚姻美满、富贵吉祥。本件通过数字算法重建了粉彩的温润光泽，完美呈现了南洋峇峇娘惹文化的繁复与华丽。",
-                工艺: "粉彩描金 · 数字多维度重建", 
-                纹样: "凤穿牡丹（对称双凤 + 重瓣牡丹 + 彩蝶点缀）", 
-                形制: "四方耦合拼图（Quadrant Coupling）", 
-                寓意: "富贵呈祥 · 百年好合" 
+                工艺: "粉彩描金 · 数字多维度重建", 纹样: "凤穿牡丹（对称双凤 + 重瓣牡丹 + 彩蝶点缀）", 形制: "四方耦合拼图（Quadrant Coupling）", 寓意: "富贵呈祥 · 百年好合" 
             },
             { 
-                title: "仙鹤秋菊 · 祥云开光", 
-                image: "3.jpg", 
+                title: "仙鹤秋菊 · 祥云开光", image: "3.jpg", 
                 desc: "以经典娘惹瓷绿为底色，中心描绘一只展翅高飞的仙鹤，四周辅以红黄相间的繁盛秋菊与如意祥云。仙鹤在正中心形成完美的轴对称，须弥座般的菊花开光框定四周，极具神圣感与仪式感。作为传统婚嫁与寿诞的常用纹样，“仙鹤+秋菊”取“鹤寿延年”之意，象征长寿与安康。本件利用角耦合原理，将整体图纹巧妙地散布在四个象限，切割重排后依然能形成万花筒般的视觉张力。",
-                工艺: "粉彩渲染 · 数字重构", 
-                纹样: "鹤寿延年（展翅仙鹤 + 重瓣秋菊 + 如意祥云）", 
-                形制: "十字对称开光（Cross Symmetrical Medallion）", 
-                寓意: "长寿安康 · 吉祥如意" 
+                工艺: "粉彩渲染 · 数字重构", 纹样: "鹤寿延年（展翅仙鹤 + 重瓣秋菊 + 如意祥云）", 形制: "十字对称开光（Cross Symmetrical Medallion）", 寓意: "长寿安康 · 吉祥如意" 
             },
             { 
-                title: "喜上梅梢 · 四方连缀", 
-                image: "4.jpg", 
+                title: "喜上梅梢 · 四方连缀", image: "4.jpg", 
                 desc: "不同于常见的深色釉底，此款以温润的米白为地。画面采用十字对称布局，四只蓝白相间的喜鹊两两对望、轻盈立于折枝梅花之上，身姿灵动。角隅处点缀红蓝相间的硕大牡丹与卷草纹，色彩明快。整体取「喜上眉梢」之美意，构图疏密有致，尽显东方花鸟画的雅趣。本件采用高精度数字建模，重现传统粉彩的细腻线条，表面辅以微浮雕与亮釉质感渲染，使古典瓷面焕发新生。",
-                工艺: "高清数字复刻 · 粉彩渲染", 
-                纹样: "折枝梅鹊（四只蓝白喜鹊 + 粉彩折枝梅花）", 
-                形制: "十字对称拼花", 
-                寓意: "喜上眉梢 · 春意盎然" 
+                工艺: "高清数字复刻 · 粉彩渲染", 纹样: "折枝梅鹊（四只蓝白喜鹊 + 粉彩折枝梅花）", 形制: "十字对称拼花", 寓意: "喜上眉梢 · 春意盎然" 
             },
             { 
-                title: "喜鹊报春 · 菱花团花", 
-                image: "5.jpg", 
+                title: "喜鹊报春 · 菱花团花", image: "5.jpg", 
                 desc: "作为娘惹嫁妆瓷器中的经典之作，此件作品以深邃孔雀绿为地。画面正中构筑端庄的几何菱形花簇，四只蓝白相间的喜鹊灵动环绕，穿梭栖息于繁茂的缠枝牡丹之间。整幅图景不仅传递出“四喜临门”与“花开富贵”的吉祥祈愿，更寄托了婚姻美满、家族昌盛的祝福。工艺上，将平面纹样重塑为立体浮雕，并以清漆涂层逼真还原了传统粉彩的温润光泽。",
-                工艺: "粉彩浮雕 · 三维数字复原", 
-                纹样: "喜鹊登枝（四只蓝白喜鹊 + 缠枝牡丹）", 
-                形制: "几何菱花", 
-                寓意: "四喜临门 · 花开富贵" 
+                工艺: "粉彩浮雕 · 三维数字复原", 纹样: "喜鹊登枝（四只蓝白喜鹊 + 缠枝牡丹）", 形制: "几何菱花", 寓意: "四喜临门 · 花开富贵" 
             },
             { 
-                title: "锦鲤穿花 · 十字团花", 
-                image: "6.jpg", 
+                title: "锦鲤穿花 · 十字团花", image: "6.jpg", 
                 desc: "娘惹瓷嫁妆器物的经典题材。画面以温润白釉为地，四尾红鲤灵动游弋于蓝色水波与绿意之间，四角点缀肥厚饱满的粉彩牡丹，配以清雅荷花。取「连年有余」与「花开富贵」之意，寓意家业丰盈、婚姻美满。本件通过数字重建重塑纹样层次，表面施以浮雕与清漆亮釉，完美复现传统粉彩瓷器的温润触感与立体光影。",
-                工艺: "数字重建 · 浮雕覆釉", 
-                纹样: "锦鲤水波（四尾红锦鲤 + 重瓣牡丹与荷花）", 
-                形制: "十字对称构图", 
-                寓意: "连年有余 · 富贵绵长" 
+                工艺: "数字重建 · 浮雕覆釉", 纹样: "锦鲤水波（四尾红锦鲤 + 重瓣牡丹与荷花）", 形制: "十字对称构图", 寓意: "连年有余 · 富贵绵长" 
             }
         ];
 
@@ -306,7 +271,7 @@
             }
         }
 
-        // 👇 默认显示长文(desc)，点击标签切换短句
+        // 进入详情页：长文永远铺在下面，短句显示在顶部盒子
         function openDetail(item) {
             currentImage = item.image;
             cabinetView.style.display = 'none'; 
@@ -314,17 +279,18 @@
             document.getElementById('detail-title').innerText = item.title;
 
             const tagContainer = document.getElementById('tag-container');
-            // 我们加了一个“总览”按钮，点击可以回到长文
             tagContainer.innerHTML = `
-                <span class="tag active" onclick="switchTab(this, '${item.desc}')">总 览</span>
                 <span class="tag" onclick="switchTab(this, '${item.工艺}')">工 艺</span>
                 <span class="tag" onclick="switchTab(this, '${item.纹样}')">纹 样</span>
                 <span class="tag" onclick="switchTab(this, '${item.形制}')">形 制</span>
                 <span class="tag" onclick="switchTab(this, '${item.寓意}')">寓 意</span>
             `;
             
-            // 默认显示长文
+            // 长文永远固定
             document.getElementById('detail-desc').innerText = item.desc;
+            
+            // 短句初始化
+            document.getElementById('short-desc-box').innerText = "👆 请点击上方标签查看专业维度的拆解";
 
             document.getElementById('rebuildBtn').disabled = false;
             document.getElementById('btn-status').innerText = "";
@@ -337,12 +303,14 @@
             }
         }
 
-        // 点击标签切换对应的文字
+        // 点击标签：只改变上方盒子里的内容，长文不动
         function switchTab(element, text) {
             const tags = document.querySelectorAll('#tag-container .tag');
             tags.forEach(tag => tag.classList.remove('active'));
             element.classList.add('active');
-            document.getElementById('detail-desc').innerText = text;
+            
+            // 只改变 short-desc-box 里面的字
+            document.getElementById('short-desc-box').innerText = text;
         }
 
         function goBack() {
@@ -350,6 +318,7 @@
             detailView.style.display = 'none';
         }
 
+        // 3D 引擎相关（保持原样）
         let scene, camera, renderer;
 
         function init3D(initialImage) {
