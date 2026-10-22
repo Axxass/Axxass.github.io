@@ -95,8 +95,10 @@
         .right-info { flex: 1; }
         .right-info h2 { color: #d4af37; font-size: 32px; margin-bottom: 20px; border-bottom: 1px solid #5a4333; padding-bottom: 10px; }
         
+        /* 长文样式 */
         .desc-text { color: #4a3324; font-size: 15px; line-height: 1.7; text-align: justify; margin-top: 25px; border-top: 1px dashed #d4af37; padding-top: 20px;}
         
+        /* 标签按钮 */
         .tag { 
             display: inline-block; background: #3e2a1e; padding: 8px 20px; border-radius: 30px; 
             font-size: 15px; color: #d4af37; margin-right: 10px; border: 1px solid #5a4333; 
@@ -104,6 +106,7 @@
         }
         .tag:hover, .tag.active { background: #d4af37; color: #1a110b; box-shadow: 0 0 15px rgba(212,175,55,0.5); transform: translateY(-2px); }
 
+        /* 高亮短句区域 */
         #short-desc-box {
             margin-top: 15px; padding: 15px; background: rgba(212, 175, 55, 0.15);
             border-left: 4px solid #d4af37; border-radius: 0 8px 8px 0;
@@ -133,18 +136,33 @@
 </head>
 <body>
 
-    <!-- 娘惹背景介绍弹窗（已加入你的核心创新点文案） -->
+    <!-- 娘惹背景介绍弹窗（融合文献与创新） -->
     <div id="intro-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(26, 17, 11, 0.6); z-index: 99999; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
-        <div style="background: #fdfaf5; width: 90%; max-width: 600px; border: 3px solid #d4af37; border-radius: 16px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); position: relative;">
+        <div style="background: #fdfaf5; width: 90%; max-width: 650px; border: 3px solid #d4af37; border-radius: 16px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); position: relative; max-height: 85vh; overflow-y: auto;">
+            
             <div onclick="closeIntro()" style="position: absolute; top: 15px; right: 20px; font-size: 28px; color: #8b6b4a; cursor: pointer; font-weight: bold; transition: 0.3s;" onmouseover="this.style.color='#d4af37'" onmouseout="this.style.color='#8b6b4a'">×</div>
             
             <h2 style="color: #8b0000; margin-bottom: 20px; text-align: center; border-bottom: 2px solid #d4af37; padding-bottom: 10px;">娘惹文化与角耦合美学</h2>
             
-            <p style="color: #4a3324; font-size: 16px; line-height: 1.8; margin-bottom: 15px; text-align: justify;">
-                <b>娘惹文化 (Peranakan)：</b> 是早期华人移民与东南亚土著文化交融的结晶。娘惹瓷砖（Nyonya Tiles）以其大胆的翠绿、粉红撞色和繁复的吉祥纹样（如凤凰、牡丹）闻名，常见于南洋老宅的墙面与地面。
+            <!-- 1. 娘惹瓷与四方连续的文化介绍 -->
+            <p style="color: #4a3324; font-size: 15px; line-height: 1.8; margin-bottom: 10px; text-align: justify; text-indent: 2em;">
+                <b>娘惹瓷</b>是19—20世纪南洋峇峇娘惹族群在景德镇定制的粉彩外销瓷，纹样融合中华传统吉祥图案与南洋本土审美，是娘惹跨文化视觉符号的典型载体。
             </p>
-            <p style="color: #4a3324; font-size: 16px; line-height: 1.8; margin-bottom: 30px; text-align: justify;">
-                <b>创新突破：四角耦合与四方连续：</b> 传统娘惹圆盘纹样受限于器皿的物理边界，难以直接应用于现代大面积建筑铺贴。本作品的核心创新在于：首创“角耦合”算法逻辑，将封闭的圆盘纹样进行十字解构与边缘重组。通过特定的四角拼合变换，使原本独立的单图能够向外无限延伸，最终达成完美的“四方连续”效果。这不仅打破了传统纹样的载体局限，更极大地拓展了其数字化铺贴的现代应用场景。
+            <p style="color: #888; font-size: 12px; margin-bottom: 15px; text-align: right;">
+                参考文献：张菡夏,陆芳芳.从娘惹瓷看马来西亚华人文化转型[J].陶瓷研究,2024,39(02):112-115.
+            </p>
+
+            <p style="color: #4a3324; font-size: 15px; line-height: 1.8; margin-bottom: 10px; text-align: justify; text-indent: 2em;">
+                <b>四方连续</b>是以一个或一组单位纹样，向上下左右四个方向规律重复排布、能够无限延展的面状装饰构图，分为散点式、连缀式、重叠式等骨骼类型。
+            </p>
+            <p style="color: #888; font-size: 12px; margin-bottom: 25px; text-align: right;">
+                参考文献：李海峰.基础图案[M].上海:东华大学出版社,2016.
+            </p>
+
+            <!-- 2. 四角耦合 -->
+            <h3 style="color: #8b0000; font-size: 18px; margin-bottom: 10px;">四角耦合</h3>
+            <p style="color: #4a3324; font-size: 15px; line-height: 1.8; margin-bottom: 20px; text-align: justify; text-indent: 2em;">
+                传统娘惹圆盘纹样受限于器皿的物理边界，难以直接应用于现代大面积建筑铺贴。本作品的核心创新在于：首创“角耦合”算法逻辑，将封闭的圆盘纹样进行十字解构与边缘重组。通过特定的四角拼合变换，使原本独立的单图能够向外无限延伸，最终达成完美的“四方连续”效果。这不仅打破了传统纹样的载体局限，更极大地拓展了其数字化铺贴的现代应用场景。
             </p>
 
             <div style="text-align: center;">
@@ -197,7 +215,6 @@
         function openIntro() { document.getElementById('intro-modal').style.display = 'flex'; }
         function closeIntro() { document.getElementById('intro-modal').style.display = 'none'; }
 
-        // 完美融入“四方连续”创新理念的数据
         const tileData = [
             { 
                 title: "锦鸡玉兰 · 四角合花", image: "1.jpg", 
