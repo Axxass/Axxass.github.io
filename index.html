@@ -27,26 +27,26 @@
         .cabinet-wrapper { display: flex; flex-direction: column; align-items: center; min-height: 75vh; padding: 40px 20px 60px; perspective: 1200px; }
         
         .open-btn {
-            padding: 12px 30px; background: #2a1b12; color: #d4af37; border: 2px solid #d4af37;
+            padding: 12px 30px; background: #8c2e28; color: #d4af37; border: 2px solid #d4af37;
             border-radius: 30px; font-size: 18px; cursor: pointer; margin-bottom: 20px; transition: 0.3s;
             box-shadow: 0 10px 20px rgba(0,0,0,0.5); z-index: 10; font-weight: bold;
         }
         .open-btn:hover { background: #d4af37; color: #1a110b; transform: translateY(-2px); }
 
+        /* 柜身：华丽红木底色+金丝藤蔓 */
         .cabinet {
             width: 100%; max-width: 620px; height: 660px; 
-            background-color: #1a110b;
-            /* 🌟 纯CSS绘制的南洋金色藤蔓暗纹，彻底告别图片加载失败 */
+            background-color: #5c1c15; /* 华丽红木底色 */
             background-image: 
-                radial-gradient(circle at 50% 50%, rgba(212,175,55,0.12) 0%, transparent 60%),
-                repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(212,175,55,0.05) 20px, rgba(212,175,55,0.05) 22px),
-                repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(212,175,55,0.05) 20px, rgba(212,175,55,0.05) 22px);
-            border: 16px solid #2a1b12; 
+                radial-gradient(circle at 50% 50%, rgba(212,175,55,0.15) 0%, transparent 70%),
+                repeating-linear-gradient(45deg, transparent, transparent 15px, rgba(212,175,55,0.08) 15px, rgba(212,175,55,0.08) 17px),
+                repeating-linear-gradient(-45deg, transparent, transparent 15px, rgba(212,175,55,0.08) 15px, rgba(212,175,55,0.08) 17px);
+            border: 16px solid #3a0e09; 
             border-radius: 8px;
             box-shadow: 
-                0 40px 80px rgba(0,0,0,0.8), 
+                0 40px 80px rgba(0,0,0,0.7), 
                 inset 0 0 0 4px #d4af37, 
-                inset 0 0 60px rgba(0,0,0,0.9);
+                inset 0 0 50px rgba(0,0,0,0.8);
             position: relative; display: flex; justify-content: center; align-items: center;
         }
 
@@ -55,7 +55,7 @@
             content: '';
             position: absolute;
             top: -40px; width: 90%; height: 40px;
-            background-color: #2a1b12;
+            background-color: #3a0e09;
             border: 4px solid #d4af37;
             border-bottom: none;
             border-radius: 20px 20px 0 0;
@@ -66,10 +66,10 @@
         /* 柜子内部 */
         .cabinet-shelf {
             width: 88%; height: 88%; 
-            background-color: #110a06;
-            background-image: radial-gradient(circle at center, rgba(255, 215, 0, 0.15) 0%, rgba(0,0,0,0.9) 100%);
-            border: 6px solid #3d2817; border-radius: 4px;
-            box-shadow: inset 0 20px 50px rgba(0,0,0,1), 0 0 0 2px #b8860b;
+            background-color: #1a0805;
+            background-image: radial-gradient(circle at center, rgba(255, 215, 0, 0.15) 0%, rgba(0,0,0,0.95) 100%);
+            border: 6px solid #3a0e09; border-radius: 4px;
+            box-shadow: inset 0 20px 50px rgba(0,0,0,1), 0 0 0 2px #d4af37;
             display: grid; 
             grid-template-columns: repeat(2, 1fr); 
             grid-template-rows: repeat(3, 1fr); 
@@ -80,22 +80,18 @@
 
         .cabinet-item {
             background-color: #111; border: 8px solid #2a1b12; border-radius: 4px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 0 0 0 2px #b8860b;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 0 0 0 2px #d4af37;
             cursor: pointer; position: relative; overflow: hidden;
             background-size: cover; background-position: center;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             width: 160px; height: 160px; 
         }
-        /* 金属拉手 */
-        .cabinet-item::after {
-            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 16px; height: 16px; background: radial-gradient(circle at 30% 30%, #ffe066, #b8860b, #4a3320);
-            border-radius: 50%; box-shadow: 2px 2px 5px rgba(0,0,0,0.8); pointer-events: none;
-        }
+        /* 👇 彻底移除了原本在这里的金属圆拉手代码 */
+
         .cabinet-item:hover {
             transform: scale(1.08) translateZ(20px); 
-            box-shadow: 0 15px 30px rgba(0,0,0,0.8), 0 0 20px #d4af37;
-            border-color: #d4af37; z-index: 10;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.8), 0 0 25px #d4af37;
+            border-color: #fff; z-index: 10;
         }
 
         /* 玻璃门 */
@@ -213,9 +209,9 @@
     </header>
 
     <div class="cabinet-wrapper" id="cabinet-view">
-        <!-- 按钮组排版修复 -->
+        <!-- 按钮组，开启后依然保留 -->
         <div style="display: flex; gap: 15px; margin-bottom: 50px; z-index: 10;">
-            <button class="open-btn" id="openBtn" onclick="openCabinet()" style="margin-bottom: 0;">✨ 开启展柜</button>
+            <button class="open-btn" id="openBtn" onclick="toggleCabinet()" style="margin-bottom: 0;">✨ 开启展柜</button>
             <button class="open-btn" onclick="openIntro()" style="background: transparent; color: #8b6b4a; border-color: #8b6b4a; margin-bottom: 0;">📖 阅读背景</button>
         </div>
         
@@ -307,15 +303,26 @@
             });
         }
 
-        function openCabinet() {
+        // 👇 新增：控制柜门的开启与关闭逻辑
+        function toggleCabinet() {
+            const box = document.getElementById('cabinet-box');
+            const btn = document.getElementById('openBtn');
+            const bgm = document.getElementById('bgMusic');
+            
             if (!isOpened) {
-                document.getElementById('cabinet-box').classList.add('opened');
+                // 开启
+                box.classList.add('opened');
                 document.getElementById('doorSound').play().catch(e=>{});
-                const bgm = document.getElementById('bgMusic');
                 bgm.volume = 0.4;
                 bgm.play().catch(e=>{});
-                document.getElementById('openBtn').style.display = 'none';
+                btn.innerText = "🚪 关闭展柜";
                 isOpened = true;
+            } else {
+                // 关闭
+                box.classList.remove('opened');
+                bgm.pause();
+                btn.innerText = "✨ 开启展柜";
+                isOpened = false;
             }
         }
 
@@ -522,7 +529,7 @@
             });
         }
 
-        // 滑移换位动画（微调了速度和跟手感）
+        // 滑移换位动画
         function animateShift(pieces, targetMap) {
             const positions = [
                 {x: -0.755, y: 0.755}, {x: 0.755, y: 0.755},
@@ -532,7 +539,7 @@
             pieces.forEach(p => { p.position.z += 0.02; }); 
 
             let progress = 0;
-            const totalSteps = 30; // 稍微拉长一点动画
+            const totalSteps = 30; 
 
             const interval = setInterval(() => {
                 progress++;
