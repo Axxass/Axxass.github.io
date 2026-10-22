@@ -99,39 +99,39 @@
             z-index: 5;
             border-radius: 4px;
             transform-style: preserve-3d;
-            /* 背景完全透明 */
             background: transparent;
+            /* 关键修复：截断内部超出的部分，防止高光溢出到柜子上 */
+            overflow: hidden; 
         }
         
-        /* 玻璃本体：纯白微透明 + 极细金边 */
+        /* 玻璃本体：极淡的白色，带有金边 */
         .glass-door::after {
             content: ''; 
             position: absolute; 
             top: 8px; left: 8px; right: 8px; bottom: 8px;
-            /* 极低透明度的纯白，模拟玻璃反光，不遮挡背后的画面 */
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(212, 175, 55, 0.6); /* 金边 */
+            background: rgba(255, 255, 255, 0.03); /* 极度透明的玻璃 */
+            border: 1px solid rgba(212, 175, 55, 0.5); /* 金边 */
             border-radius: 2px;
             transform: translateZ(1px);
             pointer-events: none; 
-            /* 添加侧面极光高光，增加玻璃质感 */
-            box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.2);
         }
 
-        /* 玻璃门上的斜向高光反光条 */
+        /* 玻璃门内部的斜向高光：调低透明度，缩小范围 */
         .glass-door .glass-highlight {
             position: absolute;
-            top: -20%; left: 10%;
-            width: 30%; height: 140%;
+            top: 0; 
+            left: 10%;
+            width: 25%; 
+            height: 100%;
             background: linear-gradient(
                 90deg,
                 transparent 0%,
-                rgba(255, 255, 255, 0.15) 45%,
-                rgba(255, 255, 255, 0.35) 50%,
-                rgba(255, 255, 255, 0.15) 55%,
+                rgba(255, 255, 255, 0.08) 45%,
+                rgba(255, 255, 255, 0.2) 50%,
+                rgba(255, 255, 255, 0.08) 55%,
                 transparent 100%
             );
-            transform: skewX(-20deg);
+            transform: skewX(-15deg);
             pointer-events: none;
             z-index: 6;
         }
@@ -141,7 +141,7 @@
             content: ''; 
             position: absolute; 
             top: 8px; left: 8px; right: 8px; bottom: 8px;
-            background: rgba(255, 255, 255, 0.02); /* 背面几乎完全透明 */
+            background: rgba(255, 255, 255, 0.02); 
             border: 1px solid rgba(212, 175, 55, 0.3);
             border-radius: 2px;
             transform: rotateY(180deg) translateZ(1px); 
@@ -252,14 +252,14 @@
         <div class="cabinet" id="cabinet-box">
             <div class="cabinet-shelf" id="shelf-container"></div>
             
-            <!-- 左玻璃门（透明 + 反光条） -->
+            <!-- 左玻璃门 -->
             <div class="glass-door left">
                 <div class="glass-highlight"></div>
             </div>
             
-            <!-- 右玻璃门（透明 + 反光条） -->
+            <!-- 右玻璃门 -->
             <div class="glass-door right">
-                <div class="glass-highlight" style="left: 45%;"></div>
+                <div class="glass-highlight" style="left: 40%;"></div>
             </div>
         </div>
     </div>
