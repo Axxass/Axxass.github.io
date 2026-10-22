@@ -518,4 +518,28 @@
                     mesh.position.y += (dest.y - mesh.position.y) * 0.2;
                 });
 
-                if (progress
+                if (progress >= totalSteps) {
+                    clearInterval(interval);
+                    // 吸附贴合
+                    pieces.forEach(mesh => {
+                        const origIdx = mesh.userData.originalIndex;
+                        const targetPosIdx = targetMap.indexOf(origIdx);
+                        mesh.position.x = positions[targetPosIdx].x;
+                        mesh.position.y = positions[targetPosIdx].y;
+                        mesh.position.z = 0; 
+                    });
+
+                    document.getElementById('btn-status').innerText = "✨ 变换完成！";
+                    setTimeout(() => { 
+                        document.getElementById('btn-status').innerText = ""; 
+                        document.getElementById('rebuildBtn').disabled = false;
+                        isAnimating = false; 
+                    }, 1000);
+                }
+            }, 20); // 20ms一步，总共 300ms 完成滑动
+        }
+
+        renderCabinet();
+    </script>
+</body>
+</html>
