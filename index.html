@@ -167,6 +167,7 @@
         <p class="subtitle">四角耦合娘惹瓷纹样 · 数字展陈系列作品</p>
     </header>
 
+    <!-- 视图 1：红木展柜 -->
     <div class="cabinet-wrapper" id="cabinet-view">
         <div style="display: flex; gap: 15px;">
             <button class="open-btn" id="openBtn" onclick="openCabinet()" style="margin-bottom: 20px;">✨ 开启展柜</button>
@@ -180,6 +181,7 @@
         </div>
     </div>
 
+    <!-- 视图 2：单品 3D 详情 -->
     <button class="back-btn" onclick="goBack()">← 返回展柜</button>
     <div id="detail-view">
         <div class="left-3d" id="canvas-container"></div>
@@ -242,7 +244,7 @@
         const shelfContainer = document.getElementById('shelf-container');
         
         let scene, camera, renderer;
-        let tileGroup; // 用于装 1 个整体或者 4 个碎片的容器
+        let tileGroup; 
         let isModelInitialized = false;
         let isOpened = false;
         let currentImage = null;
@@ -296,7 +298,6 @@
                 init3D(item.image);
                 isModelInitialized = true;
             } else {
-                // 重置为一张完整的图
                 resetToSingleTile(item.image);
             }
         }
@@ -317,7 +318,7 @@
             const container = document.getElementById('canvas-container');
             scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-            camera.position.set(0, 0, 7); // 稍微退后一点，给碎片散开留空间
+            camera.position.set(0, 0, 7);
 
             renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             renderer.setSize(container.clientWidth, container.clientHeight);
@@ -375,12 +376,10 @@
             animate();
         }
 
-        // 生成材质（带浮雕）
         function getMaterial(texture, isEdge = false) {
             if (isEdge) {
                 return new THREE.MeshStandardMaterial({ color: 0xf0f0f0, roughness: 0.8 });
             }
-            // 从 canvas 生成灰度凹凸
             const canvas = document.createElement('canvas');
             canvas.width = 256; canvas.height = 256;
             const ctx = canvas.getContext('2d');
@@ -395,20 +394,13 @@
             const bumpTexture = new THREE.CanvasTexture(canvas);
 
             return new THREE.MeshStandardMaterial({ 
-                map: texture, 
-                bumpMap: bumpTexture, 
-                bumpScale: 0.15, 
-                roughness: 0.3,
-                metalness: 0.1
+                map: texture, bumpMap: bumpTexture, bumpScale: 0.15, roughness: 0.3, metalness: 0.1
             });
         }
 
-        // 重置成一块完整瓷砖
         function resetToSingleTile(imageName) {
-            while(tileGroup.children.length > 0){ 
-                tileGroup.remove(tileGroup.children[0]); 
-            }
-            tileGroup.rotation.set(0.1, 0, 0); // 重置旋转
+            while(tileGroup.children.length > 0){ tileGroup.remove(tileGroup.children[0]); }
+            tileGroup.rotation.set(0.1, 0, 0);
             
             const textureLoader = new THREE.TextureLoader();
             textureLoader.crossOrigin = 'Anonymous'; 
@@ -421,7 +413,7 @@
             });
         }
 
-        // 核心动画：触发碎片飞散与重组
+        // 🚀 极速解构与重组动画
         function triggerRebuild() {
             if (isAnimating || !currentImage) return;
             isAnimating = true;
@@ -430,36 +422,33 @@
             const statusText = document.getElementById('btn-status');
             btn.disabled = true;
             
-            // 暂停自转并转到正面
             tileGroup.rotation.set(0.1, 0, 0);
 
             const textureLoader = new THREE.TextureLoader();
             textureLoader.crossOrigin = 'Anonymous'; 
             textureLoader.load(currentImage, function(texture) {
                 
-                // 1. 清空当前模型，准备生成 4 个碎块
                 while(tileGroup.children.length > 0){ tileGroup.remove(tileGroup.children[0]); }
                 
-                // 2. 获取原图并切成 4 块画布
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
                 const w = texture.image.width / 2;
                 const h = texture.image.height / 2;
                 canvas.width = w; canvas.height = h;
 
+                // 间距缩进 0.01 防止穿模闪烁，但视觉上基本靠在一起
                 const pieceData = [
-                    { sx: 0, sy: 0, ox: -0.75, oy: 0.75 }, // 左上
-                    { sx: w, sy: 0, ox: 0.75, oy: 0.75 },  // 右上
-                    { sx: 0, sy: h, ox: -0.75, oy: -0.75 },// 左下
-                    { sx: w, sy: h, ox: 0.75, oy: -0.75 }  // 右下
+                    { sx: 0, sy: 0, ox: -0.755, oy: 0.755 }, 
+                    { sx: w, sy: 0, ox: 0.755, oy: 0.755 },  
+                    { sx: 0, sy: h, ox: -0.755, oy: -0.755 },
+                    { sx: w, sy: h, ox: 0.755, oy: -0.755 }  
                 ];
 
-                // 严谨的四方连续对称算法变换
                 const patterns = [
-                    [0, 1, 2, 3], // 原图不变
-                    [1, 0, 3, 2], // 水平互换
-                    [2, 3, 0, 1], // 垂直互换
-                    [3, 2, 1, 0]  // 中心对称互换
+                    [0, 1, 2, 3], 
+                    [1, 0, 3, 2], 
+                    [2, 3, 0, 1], 
+                    [3, 2, 1, 0]  
                 ];
                 const currentPattern = patterns[Math.floor(Math.random() * patterns.length)];
 
@@ -471,78 +460,67 @@
                     ctx.drawImage(texture.image, p.sx, p.sy, w, h, 0, 0, w, h);
                     const pieceTex = new THREE.CanvasTexture(canvas);
                     
-                    const geometry = new THREE.BoxGeometry(1.5, 1.5, 0.2);
+                    // 稍微缩小一点点碎片的宽度，给0.01的缝隙留空间
+                    const geometry = new THREE.BoxGeometry(1.49, 1.49, 0.2);
                     const mat = getMaterial(pieceTex);
                     const edgeMat = new THREE.MeshStandardMaterial({ color: 0xf0f0f0, roughness: 0.8 });
                     const mesh = new THREE.Mesh(geometry, [edgeMat, edgeMat, edgeMat, edgeMat, mat, mat]);
                     
-                    // 初始位置在中心（拼合状态）
                     mesh.position.set(p.ox, p.oy, 0);
-                    mesh.userData = { targetX: p.ox, targetY: p.oy, index: index };
+                    mesh.userData = { index: index };
                     tileGroup.add(mesh);
                     pieces.push(mesh);
                     
                     loadedCount++;
-                    if(loadedCount === 4) startExplodeAnimation(pieces, currentPattern);
+                    if(loadedCount === 4) startExplodeAndRecombine(pieces, currentPattern);
                 });
             });
         }
 
-        function startExplodeAnimation(pieces, pattern) {
+        // 核心动画逻辑：极速展开 -> 交换 -> 合拢
+        function startExplodeAndRecombine(pieces, pattern) {
             const statusText = document.getElementById('btn-status');
-            statusText.innerText = "💥 正在解构四角碎片...";
+            statusText.innerText = "✂️ 正在解构四角...";
 
-            let progress = 0;
-            const explodeAnim = setInterval(() => {
-                progress += 0.05;
-                pieces.forEach(mesh => {
-                    // 碎片向外扩散，并稍微拉开 Z 轴距离
-                    mesh.position.x += (mesh.userData.targetX > 0 ? 0.15 : -0.15);
-                    mesh.position.y += (mesh.userData.targetY > 0 ? 0.15 : -0.15);
-                    mesh.position.z += 0.05;
-                    mesh.rotation.z += (mesh.userData.index % 2 === 0 ? 0.05 : -0.05);
+            // 1. 瞬间向四周散开一点点（只散开0.3的距离，不飞出屏幕）
+            setTimeout(() => {
+                pieces.forEach((mesh, i) => {
+                    // 计算散开方向
+                    let dirX = (i % 2 === 0) ? -0.3 : 0.3;
+                    let dirY = (i < 2) ? 0.3 : -0.3;
+                    mesh.position.x += dirX;
+                    mesh.position.y += dirY;
+                    mesh.position.z += 0.1; // 微微凸起
                 });
+                statusText.innerText = "🔄 执行角耦合运算...";
 
-                if (progress >= 1) {
-                    clearInterval(explodeAnim);
-                    // 散开后，开始交换位置
-                    startRecombineAnimation(pieces, pattern);
-                }
-            }, 30);
-        }
+                // 2. 等待 0.3秒，让他们飞到新位置
+                setTimeout(() => {
+                    const posMap = [
+                        {x: -0.755, y: 0.755}, {x: 0.755, y: 0.755},
+                        {x: -0.755, y: -0.755}, {x: 0.755, y: -0.755}
+                    ];
+                    
+                    pieces.forEach((mesh) => {
+                        // 根据算法，飞到新的目标位置
+                        const targetPos = posMap[pattern[mesh.userData.index]];
+                        mesh.position.x = targetPos.x;
+                        mesh.position.y = targetPos.y;
+                        mesh.position.z = 0;
+                    });
 
-        function startRecombineAnimation(pieces, pattern) {
-            const statusText = document.getElementById('btn-status');
-            statusText.innerText = "🔄 执行角耦合矩阵重组...";
-
-            // 获取四个原始角的位置
-            const posMap = [
-                {x: -0.75, y: 0.75}, {x: 0.75, y: 0.75},
-                {x: -0.75, y: -0.75}, {x: 0.75, y: -0.75}
-            ];
-
-            let progress = 0;
-            const moveAnim = setInterval(() => {
-                progress += 0.05;
-                pieces.forEach((mesh) => {
-                    // 根据算法，飞向新的目标位置
-                    const targetPos = posMap[pattern[mesh.userData.index]];
-                    mesh.position.x += (targetPos.x - mesh.position.x) * 0.2;
-                    mesh.position.y += (targetPos.y - mesh.position.y) * 0.2;
-                    mesh.position.z += (0 - mesh.position.z) * 0.2; // 拉回 Z 轴
-                    mesh.rotation.z += (0 - mesh.rotation.z) * 0.2; // 角度归零
-                });
-
-                if (progress >= 1) {
-                    clearInterval(moveAnim);
-                    statusText.innerText = "✨ 耦合完成！恢复四方连续旋转。";
-                    setTimeout(() => { 
-                        statusText.innerText = ""; 
-                        document.getElementById('rebuildBtn').disabled = false;
-                        isAnimating = false; // 恢复整体自转
-                    }, 1500);
-                }
-            }, 30);
+                    // 3. 等待 0.3秒后，完成
+                    setTimeout(() => {
+                        statusText.innerText = "✨ 耦合完成！";
+                        setTimeout(() => { 
+                            statusText.innerText = ""; 
+                            document.getElementById('rebuildBtn').disabled = false;
+                            isAnimating = false; 
+                        }, 1000);
+                    }, 300);
+                    
+                }, 300);
+            }, 100);
         }
 
         renderCabinet();
