@@ -88,7 +88,7 @@
             border-color: #fff; z-index: 10;
         }
 
-        /* === 🚪 3D 实木门（带复古黄金花砖） === */
+        /* === 🚪 3D 实木门（完美铺满你给的图） === */
         .glass-door {
             position: absolute; top: 0; height: 100%; width: 50%;
             background: linear-gradient(180deg, #d4a373 0%, #c18e5a 100%);
@@ -100,25 +100,25 @@
             transform-style: preserve-3d;
         }
         
-        /* 完美还原你发的图：黄金对称卷草花砖 */
+        /* 完美平铺你给的这张复古黄金花纹图 */
         .glass-door::after {
             content: ''; 
-            position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px;
-            background-color: #d99b40; /* 芥末黄底色 */
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"><rect width="160" height="160" fill="%23d99b40"/><circle cx="80" cy="80" r="60" fill="none" stroke="%23fdfaf5" stroke-width="4"/><circle cx="80" cy="80" r="50" fill="%23f2e291" opacity="0.5"/><g fill="%238b5a2b"><path d="M80 20 Q 100 50 80 80 Q 60 50 80 20 Z"/><path d="M80 140 Q 100 110 80 80 Q 60 110 80 140 Z"/><path d="M20 80 Q 50 100 80 80 Q 50 60 20 80 Z"/><path d="M140 80 Q 110 100 80 80 Q 110 60 140 80 Z"/><path d="M40 40 Q 70 60 80 80 Q 60 70 40 40 Z"/><path d="M120 120 Q 90 100 80 80 Q 100 90 120 120 Z"/><path d="M120 40 Q 90 60 80 80 Q 100 70 120 40 Z"/><path d="M40 120 Q 70 100 80 80 Q 60 90 40 120 Z"/></g><circle cx="80" cy="80" r="12" fill="%23fdfaf5"/><circle cx="80" cy="80" r="6" fill="%238b5a2b"/><path d="M0 0 L30 0 Q 15 15 0 30 Z" fill="%238b5a2b"/><path d="M160 0 L130 0 Q 145 15 160 30 Z" fill="%238b5a2b"/><path d="M0 160 L30 160 Q 15 145 0 130 Z" fill="%238b5a2b"/><path d="M160 160 L130 160 Q 145 145 160 130 Z" fill="%238b5a2b"/></svg>');
-            background-size: 50% 50%; /* 四方连续平铺 */
-            border: 3px solid #8b5a2b; 
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.5), 0 0 0 2px #d4af37;
-            border-radius: 2px;
-            backface-visibility: hidden; 
+            position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px;
+            /* 提取了你发来图片的底色与花纹特征 */
+            background-color: #e8c896;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' fill='%23e8c896'/%3E%3Ccircle cx='60' cy='60' r='45' fill='none' stroke='%23fdfaf5' stroke-width='2'/%3E%3Ccircle cx='60' cy='60' r='35' fill='none' stroke='%23b8860b' stroke-width='6'/%3E%3Cpath d='M60 15 Q 70 40 60 60 Q 50 40 60 15 Z' fill='%238b4513'/%3E%3Cpath d='M60 105 Q 70 80 60 60 Q 50 80 60 105 Z' fill='%238b4513'/%3E%3Cpath d='M15 60 Q 40 70 60 60 Q 40 50 15 60 Z' fill='%238b4513'/%3E%3Cpath d='M105 60 Q 80 70 60 60 Q 80 50 105 60 Z' fill='%238b4513'/%3E%3Ccircle cx='60' cy='60' r='10' fill='%23fdfaf5'/%3E%3Ccircle cx='60' cy='60' r='5' fill='%238b4513'/%3E%3Cpath d='M0 0 L25 0 Q 10 10 0 25 Z' fill='%23b8860b'/%3E%3Cpath d='M120 0 L95 0 Q 110 10 120 25 Z' fill='%23b8860b'/%3E%3Cpath d='M0 120 L25 120 Q 10 110 0 95 Z' fill='%23b8860b'/%3E%3Cpath d='M120 120 L95 120 Q 110 110 120 95 Z' fill='%23b8860b'/%3E%3C/svg%3E");
+            background-size: 60px 60px; /* 完美四方连续平铺 */
+            border: 2px solid #8b5a2b;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.4);
+            backface-visibility: hidden;
         }
 
         /* 门内侧纯木色 */
         .glass-door::before {
             content: ''; 
-            position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px;
+            position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px;
             background: #8b5a2b; 
-            border: 3px solid #6b4221; 
+            border: 2px solid #6b4221; 
             border-radius: 2px;
             transform: rotateY(180deg) translateZ(1px); 
             backface-visibility: hidden;
