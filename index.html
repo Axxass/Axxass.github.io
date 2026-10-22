@@ -35,12 +35,10 @@
 
         .cabinet {
             width: 100%; max-width: 620px; height: 660px; 
-            /* 深色老红木底色 */
             background-color: #2a1b12;
             background-image: url('https://www.transparenttextures.com/patterns/dark-wood.png');
             border: 16px solid #1a0f08; 
             border-radius: 8px;
-            /* 多重阴影塑造极致的立体厚度感 */
             box-shadow: 
                 0 40px 80px rgba(0,0,0,0.8), 
                 inset 0 0 0 4px #d4af37, 
@@ -48,7 +46,6 @@
             position: relative; display: flex; justify-content: center; align-items: center;
         }
 
-        /* 柜子顶部的高级木雕顶冠 (纯 CSS 实现) */
         .cabinet::before {
             content: '';
             position: absolute;
@@ -61,7 +58,6 @@
             z-index: 1;
         }
 
-        /* 柜子内部陈列区（暖黄光打底） */
         .cabinet-shelf {
             width: 88%; height: 88%; 
             background-color: #3d2817;
@@ -75,7 +71,6 @@
             justify-items: center; align-items: center;
         }
 
-        /* 柜子里的抽屉/展示格（实木包边质感） */
         .cabinet-item {
             background-color: #111; border: 8px solid #2a1b12; border-radius: 4px;
             box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 0 0 0 2px #b8860b;
@@ -84,7 +79,6 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             width: 160px; height: 160px; 
         }
-        /* 抽屉上的金属圆拉手 */
         .cabinet-item::after {
             content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             width: 16px; height: 16px; background: radial-gradient(circle at 30% 30%, #ffe066, #b8860b, #4a3320);
@@ -96,7 +90,6 @@
             border-color: #d4af37; z-index: 10;
         }
 
-        /* 两扇玻璃门 (保留原开门动画) */
         .glass-door {
             position: absolute; top: 0; height: 100%; width: 50%;
             background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0.08) 100%);
@@ -108,8 +101,6 @@
         }
         .glass-door.left { left: 0; transform-origin: left center; }
         .glass-door.right { right: 0; transform-origin: right center; }
-        
-        /* 门上的金色中式格栅纹理 */
         .glass-door::before {
             content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
             border: 1px solid rgba(212, 175, 55, 0.4); pointer-events: none;
@@ -118,7 +109,6 @@
         .cabinet.opened .glass-door.left { transform: rotateY(-115deg); }
         .cabinet.opened .glass-door.right { transform: rotateY(115deg); }
 
-        /* 视图 2：单品 3D 详情 */
         #detail-view {
             display: none; max-width: 1100px; margin: 0 auto; padding: 20px;
             flex-direction: row; gap: 40px; align-items: center;
@@ -342,6 +332,7 @@
             } else {
                 resetToSingleTile(item.image);
             }
+            currentPatternIndex = 0;
         }
 
         function switchTab(element, text) {
@@ -379,7 +370,6 @@
             scene.add(tileGroup);
 
             resetToSingleTile(initialImage);
-            currentPatternIndex = 0;
 
             let previousMousePosition = { x: 0, y: 0 };
             
@@ -501,4 +491,9 @@
                     const canvas = document.createElement('canvas');
                     canvas.width = w; canvas.height = h;
                     const ctx = canvas.getContext('2d');
-                    ctx
+                    ctx.drawImage(texture.image, pos.sx, pos.sy, w, h, 0, 0, w, h);
+                    
+                    const pieceTex = new THREE.CanvasTexture(canvas);
+                    const geometry = new THREE.BoxGeometry(1.49, 1.49, 0.2);
+                    const mat = getMaterial(pieceTex);
+                    const edgeMat = new THREE.MeshStandardMaterial({ color:
