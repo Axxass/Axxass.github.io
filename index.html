@@ -32,41 +32,38 @@
         }
         .open-btn:hover { background: #fff; color: #d4af37; transform: translateY(-2px); }
 
-        /* === 牛奶巧克力/浅拿铁木纹柜身 === */
+        /* === 牛奶巧克力实木柜身 === */
         .cabinet {
             width: 100%; max-width: 620px; height: 660px; 
-            /* 用多重渐变画出极其逼真的浅色拿铁木纹 */
             background: 
                 repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(0,0,0,0.02) 10px, rgba(0,0,0,0.02) 20px),
-                linear-gradient(135deg, #f3e2d3 0%, #e1c6b1 50%, #c9a68f 100%);
-            border: 16px solid #b08a73; /* 稍深一点的拿铁色边框 */
+                linear-gradient(135deg, #d4a373 0%, #c18e5a 50%, #a67242 100%);
+            border: 16px solid #8b5a2b; 
             border-radius: 8px;
             box-shadow: 
-                0 40px 80px rgba(0,0,0,0.3), 
+                0 40px 80px rgba(0,0,0,0.4), 
                 inset 0 0 0 4px #d4af37, 
                 inset 0 0 30px rgba(0,0,0,0.3);
             position: relative; display: flex; justify-content: center; align-items: center;
         }
 
-        /* 柜子顶冠 */
         .cabinet::before {
             content: '';
             position: absolute;
             top: -40px; width: 90%; height: 40px;
-            background: linear-gradient(135deg, #f3e2d3 0%, #e1c6b1 50%, #c9a68f 100%);
-            border: 4px solid #b08a73;
+            background: linear-gradient(135deg, #d4a373 0%, #c18e5a 50%, #a67242 100%);
+            border: 4px solid #8b5a2b;
             border-bottom: none;
             border-radius: 20px 20px 0 0;
             box-shadow: inset 0 10px 20px rgba(0,0,0,0.3);
             z-index: 1;
         }
 
-        /* 柜子内部 */
         .cabinet-shelf {
             width: 88%; height: 88%; 
             background-color: #2a1b12;
             background-image: radial-gradient(circle at center, rgba(255, 215, 0, 0.15) 0%, rgba(0,0,0,0.95) 100%);
-            border: 6px solid #b08a73; border-radius: 4px;
+            border: 6px solid #8b5a2b; border-radius: 4px;
             box-shadow: inset 0 20px 50px rgba(0,0,0,1), 0 0 0 2px #d4af37;
             display: grid; 
             grid-template-columns: repeat(2, 1fr); 
@@ -77,7 +74,7 @@
         }
 
         .cabinet-item {
-            background-color: #111; border: 8px solid #c9a68f; border-radius: 4px;
+            background-color: #111; border: 8px solid #8b5a2b; border-radius: 4px;
             box-shadow: inset 0 0 10px rgba(0,0,0,0.8), 0 0 0 2px #d4af37;
             cursor: pointer; position: relative; overflow: hidden;
             background-size: cover; background-position: center;
@@ -91,30 +88,32 @@
             border-color: #fff; z-index: 10;
         }
 
-        /* === 🚪 真实感拿铁实木边框玻璃门 === */
+        /* === 🚪 实木门（带娘惹暗纹雕花） === */
         .glass-door {
             position: absolute; top: 0; height: 100%; width: 50%;
-            /* 浅拿铁木框底色 */
-            background: linear-gradient(180deg, #f3e2d3 0%, #e1c6b1 100%);
-            border: 16px solid #b08a73; /* 厚厚的浅木门框 */
+            /* 基础木纹底色 */
+            background: linear-gradient(180deg, #d4a373 0%, #b87b42 100%);
+            border: 16px solid #8b5a2b; 
             box-shadow: inset 0 0 0 2px #d4af37, 0 10px 30px rgba(0,0,0,0.3);
             transition: transform 1.8s cubic-bezier(0.25, 1, 0.5, 1); 
             z-index: 5;
         }
         
+        /* 门上用 SVG 绘制极其精致的娘惹描金藤蔓 */
         .glass-door::after {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            /* 真实的玻璃反光 */
-            background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.05) 40%, rgba(255,255,255,0.0) 60%, rgba(255,255,255,0.1) 100%);
-            backdrop-filter: blur(1.5px);
-            border: 2px solid rgba(212, 175, 55, 0.4);
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+            content: ''; 
+            position: absolute; top: 20px; left: 20px; right: 20px; bottom: 20px;
+            /* 用淡淡金色作为背景图案 */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50 0 C 70 20, 90 30, 100 50 C 90 70, 70 80, 50 100 C 30 80, 10 70, 0 50 C 10 30, 30 20, 50 0 Z" fill="none" stroke="%23d4af37" stroke-width="2" opacity="0.4"/><path d="M50 20 C 60 40, 80 50, 50 80 C 20 50, 40 40, 50 20 Z" fill="none" stroke="%23d4af37" stroke-width="1.5" opacity="0.6"/><circle cx="50" cy="50" r="10" fill="%23d4af37" opacity="0.3"/></svg>');
+            background-size: 120px 120px; /* 花纹大小 */
+            border: 1px solid rgba(212, 175, 55, 0.3); /* 内部一道很细的金边 */
+            border-radius: 2px;
         }
 
         .glass-door.left { left: 0; transform-origin: left center; border-right-width: 6px;}
         .glass-door.right { right: 0; transform-origin: right center; border-left-width: 6px;}
 
-        /* 门上增加金属把手细节 */
+        /* 门把手 */
         .glass-door::before {
             content: ''; position: absolute; top: 50%; width: 8px; height: 40px;
             background: #d4af37; border-radius: 4px; transform: translateY(-50%); z-index: 6;
@@ -313,14 +312,12 @@
             });
         }
 
-        // 控制柜门的开启与关闭
         function toggleCabinet() {
             const box = document.getElementById('cabinet-box');
             const btn = document.getElementById('openBtn');
             const bgm = document.getElementById('bgMusic');
             
             if (!isOpened) {
-                // 开启
                 box.classList.add('opened');
                 document.getElementById('doorSound').play().catch(e=>{});
                 bgm.volume = 0.4;
@@ -328,7 +325,6 @@
                 btn.innerText = "🚪 关闭展柜";
                 isOpened = true;
             } else {
-                // 关闭
                 box.classList.remove('opened');
                 bgm.pause();
                 btn.innerText = "✨ 开启展柜";
@@ -475,7 +471,6 @@
             });
         }
 
-        // 🌟 核心逻辑：象限滑移换位
         function triggerRebuild() {
             if (isAnimating || !currentImage) return;
             isAnimating = true;
@@ -539,7 +534,6 @@
             });
         }
 
-        // 滑移换位动画
         function animateShift(pieces, targetMap) {
             const positions = [
                 {x: -0.755, y: 0.755}, {x: 0.755, y: 0.755},
