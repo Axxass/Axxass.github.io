@@ -20,14 +20,14 @@
             overflow-x: hidden; 
         }
         
-       header { text-align: center; padding: 30px 20px 10px; background: url('https://www.transparenttextures.com/patterns/wood-pattern.png'); border-bottom: 2px solid #d4af37; }
+        header { text-align: center; padding: 30px 20px 10px; background: url('https://www.transparenttextures.com/patterns/wood-pattern.png'); border-bottom: 2px solid #d4af37; }
         h1 { color: #4a3324; font-size: 42px; margin-bottom: 10px; letter-spacing: 2px; text-shadow: 1px 1px 2px rgba(255,255,255,0.8); }
         p.subtitle { color: #8b6b4a; font-size: 18px; }
 
         .cabinet-wrapper { display: flex; flex-direction: column; align-items: center; min-height: 70vh; padding: 10px 20px 40px; }
         
         .open-btn {
-            padding: 12px 40px; background: #936343; color: #d4af37; border: 2px solid #d4af37;
+            padding: 12px 30px; background: #936343; color: #d4af37; border: 2px solid #d4af37;
             border-radius: 30px; font-size: 18px; cursor: pointer; margin-bottom: 20px; transition: 0.3s;
             box-shadow: 0 5px 15px rgba(0,0,0,0.5); z-index: 10; font-weight: bold;
         }
@@ -36,7 +36,6 @@
         .cabinet {
             width: 100%; max-width: 600px; height: 650px; background-color: #5c3b25;
             border: 20px solid #5c3d2a; border-radius: 10px;
-            /* 加粗了深色阴影，在浅色背景上更有立体感 */
             box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 0 50px rgba(0,0,0,0.8);
             position: relative; display: flex; justify-content: center; align-items: center;
         }
@@ -125,6 +124,28 @@
 </head>
 <body>
 
+    <!-- 👇 娘惹背景介绍弹窗（加在最前面，默认隐藏） -->
+    <div id="intro-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(26, 17, 11, 0.5); z-index: 999; justify-content: center; align-items: center; backdrop-filter: blur(4px);">
+        <div style="background: rgba(253, 250, 245, 0.88); width: 90%; max-width: 600px; border: 3px solid #d4af37; border-radius: 16px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); position: relative;">
+            <!-- 右上角关闭 X 按钮 -->
+            <div onclick="closeIntro()" style="position: absolute; top: 15px; right: 20px; font-size: 28px; color: #8b6b4a; cursor: pointer; font-weight: bold;">×</div>
+            
+            <h2 style="color: #8b0000; margin-bottom: 20px; text-align: center; border-bottom: 1px solid #d4af37; padding-bottom: 10px;">娘惹文化与角耦合美学</h2>
+            
+            <p style="color: #4a3324; font-size: 16px; line-height: 1.8; margin-bottom: 15px; text-align: justify;">
+                <b>娘惹文化 (Peranakan)：</b> 是早期华人移民与东南亚土著文化交融的结晶。娘惹瓷砖（Nyonya Tiles）以其大胆的翠绿、粉红撞色和繁复的吉祥纹样（如凤凰、牡丹）闻名，常见于南洋老宅的墙面与地面。
+            </p>
+            <p style="color: #4a3324; font-size: 16px; line-height: 1.8; margin-bottom: 30px; text-align: justify;">
+                <b>四角耦合 (Corner Coupling)：</b> 是一种进阶的四方连续设计逻辑。将单块正方形的四个角分别与其他四块拼接，打破传统的横平竖直，形成万花筒般的对称镜像。本展陈通过 AI 生成与算法解构，重现了这种极具数学秩序的古典美。
+            </p>
+
+            <!-- 底部确认按钮 -->
+            <div style="text-align: center;">
+                <button onclick="closeIntro()" style="padding: 12px 50px; background: #d4af37; color: #1a110b; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(212,175,55,0.4);">确 认</button>
+            </div>
+        </div>
+    </div>
+
     <header>
         <h1>隅合万象</h1>
         <p class="subtitle">四角耦合娘惹瓷纹样 · 数字展陈系列作品</p>
@@ -132,9 +153,13 @@
 
     <!-- 视图 1：红木展柜 -->
     <div class="cabinet-wrapper" id="cabinet-view">
-        <button class="open-btn" id="openBtn" onclick="openCabinet()">✨ 开启展柜</button>
+        <!-- 👇 这里的按钮并排放在了一起 -->
+        <div style="display: flex; gap: 15px;">
+            <button class="open-btn" id="openBtn" onclick="openCabinet()" style="margin-bottom: 20px;">✨ 开启展柜</button>
+            <button class="open-btn" onclick="openIntro()" style="background: transparent; color: #8b6b4a; border-color: #8b6b4a; margin-bottom: 20px;">📖 阅读背景</button>
+        </div>
         
-        <div class="cabinet" id="cabinet-box">
+ margin        <div class="cabinet" id="cabinet-box">
             <div class="cabinet-shelf" id="shelf-container"></div>
             <div class="glass-door left"></div>
             <div class="glass-door right"></div>
@@ -157,14 +182,23 @@
             <button id="rebuildBtn" class="action-btn" onclick="triggerRebuild()">🔄 对称重组变形</button>
             <p id="btn-status" style="color: #8b0000; font-size: 14px; margin-top: 10px; height: 20px;"></p>
 
-            <p style="color: #888; font-size: 14px; margin-top: 15px;">🖱️ 鼠标拖拽 / 手指滑动旋转 360°</p>
+            <p style="color: #888; font-size: 14px;-top: 15px;">🖱️ 鼠标拖拽 / 手指滑动旋转 360°</p>
         </div>
     </div>
 
     <!-- 音效 -->
     <audio id="doorSound" src="https://assets.mixkit.co/active_storage/sfx/2043/2043-preview.mp3"></audio>
-   <audio id="bgMusic" src="bgm.mp3" loop></audio>
+    <audio id="bgMusic" src="bgm.mp3" loop></audio>
+
     <script>
+        // 控制介绍面板的显示与隐藏
+        function openIntro() {
+            document.getElementById('intro-modal').style.display = 'flex';
+        }
+        function closeIntro() {
+            document.getElementById('intro-modal').style.display = 'none';
+        }
+
         // 6 张图的完整数据
         const tileData = [
             { title: "锦鸡玉兰 · 四角合花", image: "1.jpg", desc: "提取传统娘惹瓷中最经典的翠绿基调与粉彩描金技法。本件采用“角耦合”设计逻辑，将画面解构为四个象限。正序拼合时，一对锦鸡在中心形成完美的镜像对称，长尾交织，四周环绕着洁白的玉兰与繁茂的枝蔓。锦鸡象征“锦绣前程”，玉兰代表“玉堂富贵”，两者结合，寓意家业兴旺、满堂生辉。通过数字重构，使传统南洋花鸟图纹具备了现代拼图般的解构美学。" },
@@ -172,7 +206,7 @@
             { title: "仙鹤秋菊 · 祥云开光", image: "3.jpg", desc: "以经典娘惹瓷绿为底色，中心描绘一只展翅高飞的仙鹤，四周辅以红黄相间的繁盛秋菊与如意祥云。仙鹤在正中心形成完美的轴对称，须弥座般的菊花开光框定四周，极具神圣感与仪式感。作为传统婚嫁与寿诞的常用纹样，“仙鹤+秋菊”取“鹤寿延年”之意，象征长寿与安康。本件利用角耦合原理，将整体图纹巧妙地散布在四个象限，切割重排后依然能形成万花筒般的视觉张力。" },
             { title: "喜上梅梢 · 四方连缀", image: "4.jpg", desc: "不同于常见的深色釉底，此款以温润的米白为地。画面采用十字对称布局，四只蓝白相间的喜鹊两两对望、轻盈立于折枝梅花之上，身姿灵动。角隅处点缀红蓝相间的硕大牡丹与卷草纹，色彩明快。整体取「喜上眉梢」之美意，构图疏密有致，尽显东方花鸟画的雅趣。本件采用高精度数字建模，重现传统粉彩的细腻线条，表面辅以微浮雕与亮釉质感渲染，使古典瓷面焕发新生。" },
             { title: "喜鹊报春 · 菱花团花", image: "5.jpg", desc: "作为娘惹嫁妆瓷器中的经典之作，此件作品以深邃孔雀绿为地。画面正中构筑端庄的几何菱形花簇，四只蓝白相间的喜鹊灵动环绕，穿梭栖息于繁茂的缠枝牡丹之间。整幅图景不仅传递出“四喜临门”与“花开富贵”的吉祥祈愿，更寄托了婚姻美满、家族昌盛的祝福。工艺上，将平面纹样重塑为立体浮雕，并以清漆涂层逼真还原了传统粉彩的温润光泽。" },
-            { title: "锦鲤穿花 · 十字团花", image: "6.jpg", desc: "娘惹瓷嫁妆器物的经典题材。画面以温润白釉为地，四尾红鲤灵动游弋于蓝色水波与绿意之间，四角点缀肥厚饱满的粉彩牡丹，配以清雅荷花。取「连年有余」与「花开富贵」之意，寓意家业丰盈、婚姻美满。本件通过数字重建重塑纹样层次，表面施以浮雕与清漆亮釉，完美复现传统粉彩瓷器的温润光泽与立体触感。" }
+            { title: "锦鲤穿花 · 十字团花", image: "6.jpg", desc: "娘惹瓷嫁妆器物的经典题材。画面以温润白釉为地，四尾红鲤灵动游弋于蓝色水波与绿意之间，四角点缀肥厚饱满的粉彩牡丹，配以清雅荷花。取「连年有余」与「花开富贵」之意，寓意家业丰盈、婚姻美满。本件通过数字重建重塑纹样层次，表面施以浮雕与清漆亮釉，完美复现传统粉彩瓷器的温润触感与立体光影。" }
         ];
 
         const cabinetView = document.getElementById('cabinet-view');
@@ -182,8 +216,8 @@
         let isModelInitialized = false;
         let isOpened = false;
         let currentImage = null;
-        let isAnimating = false; // 控制重组动画时的状态
-        let isDragging = false; // 控制拖拽状态
+        let isAnimating = false; 
+        let isDragging = false; 
 
         function renderCabinet() {
             shelfContainer.innerHTML = '';
@@ -215,7 +249,6 @@
             document.getElementById('detail-title').innerText = item.title;
             document.getElementById('detail-desc').innerText = item.desc;
 
-            // 重置按钮状态
             document.getElementById('rebuildBtn').disabled = false;
             document.getElementById('btn-status').innerText = "";
 
@@ -245,7 +278,6 @@
             renderer.domElement.style.touchAction = 'none';
             container.appendChild(renderer.domElement);
 
-            // 强侧光，让浮雕立体感拉满
             scene.add(new THREE.AmbientLight(0xffffff, 0.5)); 
             const mainLight = new THREE.DirectionalLight(0xffeedd, 0.9); 
             mainLight.position.set(5, 5, 10); 
@@ -255,9 +287,8 @@
             scene.add(backLight);
 
             const geometry = new THREE.BoxGeometry(3, 3, 0.3); 
-            const material = new THREE.MeshStandardMaterial({ color: 0x888888 });
-           const edgeMaterial = new THREE.MeshStandardMaterial({ color: 0xf0f0f0, roughness: 0.8 }); // 陶瓷白边
-            const defaultFace = new THREE.MeshStandardMaterial({ color: 0x888888 }); // 正面初始灰色
+            const edgeMaterial = new THREE.MeshStandardMaterial({ color: 0xf0f0f0, roughness: 0.8 }); 
+            const defaultFace = new THREE.MeshStandardMaterial({ color: 0x888888 }); 
             tileMesh = new THREE.Mesh(geometry, [edgeMaterial, edgeMaterial, edgeMaterial, edgeMaterial, defaultFace, defaultFace]);
             tileMesh.rotation.x = 0.1;
             scene.add(tileMesh);
@@ -302,7 +333,6 @@
             animate();
         }
 
-        // 初始加载图片，带灰度浮雕生成
         function load3DTexture(imageName, isNew = false) {
             const textureLoader = new THREE.TextureLoader();
             textureLoader.crossOrigin = 'Anonymous'; 
@@ -333,7 +363,7 @@
                     });
                     
                     if (tileMesh) {
-                       const edgeMaterial = new THREE.MeshStandardMaterial({ color: 0xf0f0f0, roughness: 0.8 });
+                        const edgeMaterial = new THREE.MeshStandardMaterial({ color: 0xf0f0f0, roughness: 0.8 });
                         tileMesh.material = [edgeMaterial, edgeMaterial, edgeMaterial, edgeMaterial, material, material];
                         if (isNew) tileMesh.scale.set(0.8, 0.8, 0.8);
                     }
@@ -341,7 +371,6 @@
             );
         }
 
-        // 触发重组（带暂停、可视化计算、浮雕更新、恢复旋转）
         function triggerRebuild() {
             if (isAnimating || !currentImage) return;
             isAnimating = true;
@@ -351,7 +380,6 @@
             btn.disabled = true;
             statusText.innerText = "🧩 正在对称计算与重组...";
 
-            // 暂停并转到正面
             if(tileMesh) {
                 tileMesh.rotation.y = 0;
                 tileMesh.rotation.x = 0.1;
@@ -368,16 +396,14 @@
                 const w = img.width / 2;
                 const h = img.height / 2;
 
-                // 四种对称规律
                 const patterns = [
-                    [[0,0], [w,0], [0,h], [w,h]], // 原图
-                    [[w,0], [0,0], [w,h], [0,h]], // 水平镜像
-                    [[0,h], [w,h], [0,0], [w,0]], // 垂直镜像
-                    [[w,h], [0,h], [w,0], [0,0]]  // 中心对称
+                    [[0,0], [w,0], [0,h], [w,h]], 
+                    [[w,0], [0,0], [w,h], [0,h]], 
+                    [[0,h], [w,h], [0,0], [w,0]], 
+                    [[w,h], [0,h], [w,0], [0,0]]  
                 ];
                 const p = patterns[Math.floor(Math.random() * patterns.length)];
 
-                // 画布重组
                 ctx.drawImage(img, p[0][0], p[0][1], w, h, 0, 0, 256, 256);
                 ctx.drawImage(img, p[1][0], p[1][1], w, h, 256, 0, 256, 256);
                 ctx.drawImage(img, p[2][0], p[2][1], w, h, 0, 256, 256, 256);
@@ -386,7 +412,6 @@
                 setTimeout(() => {
                     const newTexture = new THREE.CanvasTexture(canvas);
                     
-                    // 生成新图案的灰度浮雕
                     const bumpCanvas = document.createElement('canvas');
                     bumpCanvas.width = 512; bumpCanvas.height = 512;
                     const bctx = bumpCanvas.getContext('2d');
@@ -400,7 +425,6 @@
                     bctx.putImageData(bImgData, 0, 0);
                     const newBump = new THREE.CanvasTexture(bumpCanvas);
 
-                    // 应用新材质（带正确浮雕）
                     const newMaterial = new THREE.MeshStandardMaterial({ 
                         map: newTexture, 
                         bumpMap: newBump, 
@@ -410,7 +434,7 @@
                     });
 
                     if (tileMesh) {
-                       const edgeMaterial = new THREE.MeshStandardMaterial({ color: 0xf0f0f0, roughness: 0.8 });
+                        const edgeMaterial = new THREE.MeshStandardMaterial({ color: 0xf0f0f0, roughness: 0.8 });
                         tileMesh.material = [edgeMaterial, edgeMaterial, edgeMaterial, edgeMaterial, newMaterial, newMaterial];
                         tileMesh.scale.set(1.1, 1.1, 1.1);
                         setTimeout(() => { tileMesh.scale.set(1, 1, 1); }, 200);
@@ -420,8 +444,8 @@
                     setTimeout(() => { statusText.innerText = ""; }, 2000);
                     
                     btn.disabled = false;
-                    isAnimating = false; // 恢复旋转
-                }, 800); // 0.8秒展示计算过程
+                    isAnimating = false; 
+                }, 800); 
             };
         }
 
