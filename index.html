@@ -136,7 +136,6 @@
     <!-- 娘惹背景介绍弹窗 -->
     <div id="intro-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(26, 17, 11, 0.6); z-index: 99999; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
         <div style="background: #fdfaf5; width: 90%; max-width: 650px; border: 3px solid #d4af37; border-radius: 16px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); position: relative; max-height: 85vh; overflow-y: auto;">
-            
             <div onclick="closeIntro()" style="position: absolute; top: 15px; right: 20px; font-size: 28px; color: #8b6b4a; cursor: pointer; font-weight: bold; transition: 0.3s;" onmouseover="this.style.color='#d4af37'" onmouseout="this.style.color='#8b6b4a'">×</div>
             
             <h2 style="color: #8b0000; margin-bottom: 20px; text-align: center; border-bottom: 2px solid #d4af37; padding-bottom: 10px;">娘惹文化与角耦合美学</h2>
@@ -147,19 +146,16 @@
             <p style="color: #888; font-size: 12px; margin-bottom: 15px; text-align: right;">
                 参考文献：张菡夏,陆芳芳.从娘惹瓷看马来西亚华人文化转型[J].陶瓷研究,2024,39(02):112-115.
             </p>
-
             <p style="color: #4a3324; font-size: 15px; line-height: 1.8; margin-bottom: 10px; text-align: justify; text-indent: 2em;">
                 <b>四方连续</b>是以一个或一组单位纹样，向上下左右四个方向规律重复排布、能够无限延展的面状装饰构图，分为散点式、连缀式、重叠式等骨骼类型。
             </p>
             <p style="color: #888; font-size: 12px; margin-bottom: 25px; text-align: right;">
                 参考文献：李海峰.基础图案[M].上海:东华大学出版社,2016.
             </p>
-
             <h3 style="color: #8b0000; font-size: 18px; margin-bottom: 10px;">四角耦合</h3>
             <p style="color: #4a3324; font-size: 15px; line-height: 1.8; margin-bottom: 20px; text-align: justify; text-indent: 2em;">
                 传统娘惹圆盘纹样受限于器皿的物理边界，难以直接应用于现代大面积建筑铺贴。本作品的核心创新在于：首创“角耦合”算法逻辑，将封闭的圆盘纹样进行十字解构与边缘重组。通过特定的四角拼合变换，使原本独立的单图能够向外无限延伸，最终达成完美的“四方连续”效果。这不仅打破了传统纹样的载体局限，更极大地拓展了其数字化铺贴的现代应用场景。
             </p>
-
             <div style="text-align: center;">
                 <button onclick="closeIntro()" style="padding: 12px 50px; background: #d4af37; color: #1a110b; border: none; border-radius: 30px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(212,175,55,0.4);">确 认</button>
             </div>
@@ -171,7 +167,6 @@
         <p class="subtitle">四角耦合娘惹瓷纹样 · 数字展陈系列作品</p>
     </header>
 
-    <!-- 视图 1：红木展柜 -->
     <div class="cabinet-wrapper" id="cabinet-view">
         <div style="display: flex; gap: 15px;">
             <button class="open-btn" id="openBtn" onclick="openCabinet()" style="margin-bottom: 20px;">✨ 开启展柜</button>
@@ -185,7 +180,6 @@
         </div>
     </div>
 
-    <!-- 视图 2：单品 3D 详情 -->
     <button class="back-btn" onclick="goBack()">← 返回展柜</button>
     <div id="detail-view">
         <div class="left-3d" id="canvas-container"></div>
@@ -214,65 +208,46 @@
             { 
                 title: "锦鸡玉兰 · 四角合花", image: "1.jpg", 
                 desc: "提取传统娘惹瓷中最经典的翠绿基调与粉彩描金技法。本件采用“角耦合”设计逻辑，将画面解构为四个象限。正序拼合时，一对锦鸡在中心形成完美的镜像对称，长尾交织，四周环绕着洁白的玉兰与繁茂的枝蔓。锦鸡象征“锦绣前程”，玉兰代表“玉堂富贵”，两者结合，寓意家业兴旺、满堂生辉。通过数字重构，使传统南洋花鸟图纹具备了现代拼图般的解构美学。",
-                工艺: "粉彩平涂 · 矩阵切割重建", 
-                纹样: "锦绣满堂（一对锦鸡 + 折枝玉兰 + 缠枝藤蔓）", 
-                形制: "四角耦合重组 · 实现四方连续延伸", 
-                寓意: "锦绣前程 · 玉堂富贵" 
+                工艺: "粉彩平涂 · 矩阵切割重建", 纹样: "锦绣满堂（一对锦鸡 + 折枝玉兰 + 缠枝藤蔓）", 形制: "四角耦合重组 · 实现四方连续延伸", 寓意: "锦绣前程 · 玉堂富贵" 
             },
             { 
                 title: "凤穿牡丹 · 蝶恋花境", image: "2.jpg", 
                 desc: "娘惹瓷嫁妆器物最具标志性的经典题材。画面中央，一对凤凰双翼舒展，尾羽如孔雀般华丽下垂，与四周肥厚饱满的牡丹花交相辉映。作品巧妙融入了蝴蝶作为视觉引导线，形成“蝶恋花”的生动情境。四角的牡丹与凤凰的局部在中心交汇，取「凤穿牡丹」之意。寓意婚姻美满、富贵吉祥。本件通过数字算法重建了粉彩的温润光泽，完美呈现了南洋峇峇娘惹文化的繁复与华丽。",
-                工艺: "粉彩描金 · 数字多维度重建", 
-                纹样: "凤穿牡丹（对称双凤 + 重瓣牡丹 + 彩蝶点缀）", 
-                形制: "四角中心对称 · 无界四方连续铺贴", 
-                寓意: "富贵呈祥 · 百年好合" 
+                工艺: "粉彩描金 · 数字多维度重建", 纹样: "凤穿牡丹（对称双凤 + 重瓣牡丹 + 彩蝶点缀）", 形制: "四角中心对称 · 无界四方连续铺贴", 寓意: "富贵呈祥 · 百年好合" 
             },
             { 
                 title: "仙鹤秋菊 · 祥云开光", image: "3.jpg", 
                 desc: "以经典娘惹瓷绿为底色，中心描绘一只展翅高飞的仙鹤，四周辅以红黄相间的繁盛秋菊与如意祥云。仙鹤在正中心形成完美的轴对称，须弥座般的菊花开光框定四周，极具神圣感与仪式感。作为传统婚嫁与寿诞的常用纹样，“仙鹤+秋菊”取“鹤寿延年”之意，象征长寿与安康。本件利用角耦合原理，将整体图纹巧妙地散布在四个象限，切割重排后依然能形成万花筒般的视觉张力。",
-                工艺: "粉彩渲染 · 数字重构", 
-                纹样: "鹤寿延年（展翅仙鹤 + 重瓣秋菊 + 如意祥云）", 
-                形制: "十字开光解构 · 突破圆盘局限", 
-                寓意: "长寿安康 · 吉祥如意" 
+                工艺: "粉彩渲染 · 数字重构", 纹样: "鹤寿延年（展翅仙鹤 + 重瓣秋菊 + 如意祥云）", 形制: "十字开光解构 · 突破圆盘局限", 寓意: "长寿安康 · 吉祥如意" 
             },
             { 
                 title: "喜上梅梢 · 四方连缀", image: "4.jpg", 
                 desc: "不同于常见的深色釉底，此款以温润的米白为地。画面采用十字对称布局，四只蓝白相间的喜鹊两两对望、轻盈立于折枝梅花之上，身姿灵动。角隅处点缀红蓝相间的硕大牡丹与卷草纹，色彩明快。整体取「喜上眉梢」之美意，构图疏密有致，尽显东方花鸟画的雅趣。本件采用高精度数字建模，重现传统粉彩的细腻线条，表面辅以微浮雕与亮釉质感渲染，使古典瓷面焕发新生。",
-                工艺: "高清数字复刻 · 粉彩渲染", 
-                纹样: "折枝梅鹊（四只蓝白喜鹊 + 粉彩折枝梅花）", 
-                形制: "角耦合阵列 · 无限拼接的十字对称拼花", 
-                寓意: "喜上眉梢 · 春意盎然" 
+                工艺: "高清数字复刻 · 粉彩渲染", 纹样: "折枝梅鹊（四只蓝白喜鹊 + 粉彩折枝梅花）", 形制: "角耦合阵列 · 无限拼接的十字对称拼花", 寓意: "喜上眉梢 · 春意盎然" 
             },
             { 
                 title: "喜鹊报春 · 菱花团花", image: "5.jpg", 
                 desc: "作为娘惹嫁妆瓷器中的经典之作，此件作品以深邃孔雀绿为地。画面正中构筑端庄的几何菱形花簇，四只蓝白相间的喜鹊灵动环绕，穿梭栖息于繁茂的缠枝牡丹之间。整幅图景不仅传递出“四喜临门”与“花开富贵”的吉祥祈愿，更寄托了婚姻美满、家族昌盛的祝福。工艺上，将平面纹样重塑为立体浮雕，并以清漆涂层逼真还原了传统粉彩的温润光泽。",
-                工艺: "粉彩浮雕 · 三维数字复原", 
-                纹样: "喜鹊登枝（四只蓝白喜鹊 + 缠枝牡丹）", 
-                形制: "几何菱花耦合 · 适配大面积矩阵铺贴", 
-                寓意: "四喜临门 · 花开富贵" 
+                工艺: "粉彩浮雕 · 三维数字复原", 纹样: "喜鹊登枝（四只蓝白喜鹊 + 缠枝牡丹）", 形制: "几何菱花耦合 · 适配大面积矩阵铺贴", 寓意: "四喜临门 · 花开富贵" 
             },
             { 
                 title: "锦鲤穿花 · 十字团花", image: "6.jpg", 
                 desc: "娘惹瓷嫁妆器物的经典题材。画面以温润白釉为地，四尾红鲤灵动游弋于蓝色水波与绿意之间，四角点缀肥厚饱满的粉彩牡丹，配以清雅荷花。取「连年有余」与「花开富贵」之意，寓意家业丰盈、婚姻美满。本件通过数字重建重塑纹样层次，表面施以浮雕与清漆亮釉，完美复现传统粉彩瓷器的温润触感与立体光影。",
-                工艺: "数字重建 · 浮雕覆釉", 
-                纹样: "锦鲤水波（四尾红锦鲤 + 重瓣牡丹与荷花）", 
-                形制: "四角连续变换 · 现代建筑无缝铺贴应用", 
-                寓意: "连年有余 · 富贵绵长" 
+                工艺: "数字重建 · 浮雕覆釉", 纹样: "锦鲤水波（四尾红锦鲤 + 重瓣牡丹与荷花）", 形制: "四角连续变换 · 现代建筑无缝铺贴应用", 寓意: "连年有余 · 富贵绵长" 
             }
         ];
 
         const cabinetView = document.getElementById('cabinet-view');
         const detailView = document.getElementById('detail-view');
         const shelfContainer = document.getElementById('shelf-container');
-        let tileMesh;
+        
+        let scene, camera, renderer;
+        let tileGroup; // 用于装 1 个整体或者 4 个碎片的容器
         let isModelInitialized = false;
         let isOpened = false;
         let currentImage = null;
         let isAnimating = false; 
         let isDragging = false; 
-        
-        // 用于平滑缩放的变量
-        let targetScale = 1;
 
         function renderCabinet() {
             shelfContainer.innerHTML = '';
@@ -321,7 +296,8 @@
                 init3D(item.image);
                 isModelInitialized = true;
             } else {
-                load3DTexture(item.image, true);
+                // 重置为一张完整的图
+                resetToSingleTile(item.image);
             }
         }
 
@@ -337,46 +313,40 @@
             detailView.style.display = 'none';
         }
 
-        let scene, camera, renderer;
-
         function init3D(initialImage) {
             const container = document.getElementById('canvas-container');
             scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-            camera.position.set(0, 0, 6);
+            camera.position.set(0, 0, 7); // 稍微退后一点，给碎片散开留空间
 
             renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             renderer.setSize(container.clientWidth, container.clientHeight);
             renderer.domElement.style.touchAction = 'none';
             container.appendChild(renderer.domElement);
 
-            scene.add(new THREE.AmbientLight(0xffffff, 0.5)); 
-            const mainLight = new THREE.DirectionalLight(0xffeedd, 0.9); 
+            scene.add(new THREE.AmbientLight(0xffffff, 0.6)); 
+            const mainLight = new THREE.DirectionalLight(0xffeedd, 1.0); 
             mainLight.position.set(5, 5, 10); 
             scene.add(mainLight);
-            const backLight = new THREE.DirectionalLight(0xd4af37, 0.4); 
+            const backLight = new THREE.DirectionalLight(0xd4af37, 0.5); 
             backLight.position.set(-5, -5, -10);
             scene.add(backLight);
 
-            const geometry = new THREE.BoxGeometry(3, 3, 0.3); 
-            const edgeMaterial = new THREE.MeshStandardMaterial({ color: 0xf0f0f0, roughness: 0.8 }); 
-            const defaultFace = new THREE.MeshStandardMaterial({ color: 0x888888 }); 
-            tileMesh = new THREE.Mesh(geometry, [edgeMaterial, edgeMaterial, edgeMaterial, edgeMaterial, defaultFace, defaultFace]);
-            tileMesh.rotation.x = 0.1;
-            scene.add(tileMesh);
+            tileGroup = new THREE.Group();
+            scene.add(tileGroup);
 
-            load3DTexture(initialImage);
+            resetToSingleTile(initialImage);
 
             let previousMousePosition = { x: 0, y: 0 };
             
             container.addEventListener('mousedown', (e) => { isDragging = true; previousMousePosition = { x: e.clientX, y: e.clientY }; });
             window.addEventListener('mouseup', () => { isDragging = false; });
             window.addEventListener('mousemove', (e) => {
-                if (!isDragging || !tileMesh) return;
+                if (!isDragging || !tileGroup) return;
                 const deltaX = e.clientX - previousMousePosition.x;
                 const deltaY = e.clientY - previousMousePosition.y;
-                tileMesh.rotation.y += deltaX * 0.01;
-                tileMesh.rotation.x += deltaY * 0.01;
+                tileGroup.rotation.y += deltaX * 0.01;
+                tileGroup.rotation.x += deltaY * 0.01;
                 previousMousePosition = { x: e.clientX, y: e.clientY };
             });
 
@@ -386,75 +356,72 @@
             }, { passive: false });
             window.addEventListener('touchend', () => { isDragging = false; });
             container.addEventListener('touchmove', (e) => {
-                if (!isDragging || !tileMesh) return;
+                if (!isDragging || !tileGroup) return;
                 e.preventDefault(); 
                 const deltaX = e.touches[0].clientX - previousMousePosition.x;
                 const deltaY = e.touches[0].clientY - previousMousePosition.y;
-                tileMesh.rotation.y += deltaX * 0.01;
-                tileMesh.rotation.x += deltaY * 0.01;
+                tileGroup.rotation.y += deltaX * 0.01;
+                tileGroup.rotation.x += deltaY * 0.01;
                 previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
             }, { passive: false });
 
             function animate() {
                 requestAnimationFrame(animate);
-                
-                if (tileMesh) {
-                    if (!isDragging && !isAnimating) {
-                        tileMesh.rotation.y += 0.005; 
-                    }
-                    
-                    // 平滑的放大缩小呼吸动画
-                    let currentScale = tileMesh.scale.x;
-                    if (Math.abs(currentScale - targetScale) > 0.01) {
-                        let newScale = currentScale + (targetScale - currentScale) * 0.15;
-                        tileMesh.scale.set(newScale, newScale, newScale);
-                    }
+                if (tileGroup && !isDragging && !isAnimating) {
+                    tileGroup.rotation.y += 0.005; 
                 }
-                
                 renderer.render(scene, camera);
             }
             animate();
         }
 
-        function load3DTexture(imageName, isNew = false) {
-            const textureLoader = new THREE.TextureLoader();
-            textureLoader.crossOrigin = 'Anonymous'; 
-            textureLoader.load(imageName, 
-                function(texture) {
-                    texture.minFilter = THREE.LinearFilter;
-                    texture.magFilter = THREE.LinearFilter;
-                    
-                    const canvas = document.createElement('canvas');
-                    canvas.width = 512; canvas.height = 512;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(texture.image, 0, 0, 512, 512);
-                    const imgData = ctx.getImageData(0, 0, 512, 512);
-                    const data = imgData.data;
-                    for (let i = 0; i < data.length; i += 4) {
-                        const avg = (data[i] + data[i+1] + data[i+2]) / 3;
-                        data[i] = avg; data[i+1] = avg; data[i+2] = avg; 
-                    }
-                    ctx.putImageData(imgData, 0, 0);
-                    const bumpTexture = new THREE.CanvasTexture(canvas);
+        // 生成材质（带浮雕）
+        function getMaterial(texture, isEdge = false) {
+            if (isEdge) {
+                return new THREE.MeshStandardMaterial({ color: 0xf0f0f0, roughness: 0.8 });
+            }
+            // 从 canvas 生成灰度凹凸
+            const canvas = document.createElement('canvas');
+            canvas.width = 256; canvas.height = 256;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(texture.image, 0, 0, 256, 256);
+            const imgData = ctx.getImageData(0, 0, 256, 256);
+            const data = imgData.data;
+            for (let i = 0; i < data.length; i += 4) {
+                const avg = (data[i] + data[i+1] + data[i+2]) / 3;
+                data[i] = avg; data[i+1] = avg; data[i+2] = avg; 
+            }
+            ctx.putImageData(imgData, 0, 0);
+            const bumpTexture = new THREE.CanvasTexture(canvas);
 
-                    const material = new THREE.MeshStandardMaterial({ 
-                        map: texture, 
-                        bumpMap: bumpTexture, 
-                        bumpScale: 0.15, 
-                        roughness: 0.3,
-                        metalness: 0.1
-                    });
-                    
-                    if (tileMesh) {
-                        const edgeMaterial = new THREE.MeshStandardMaterial({ color: 0xf0f0f0, roughness: 0.8 });
-                        tileMesh.material = [edgeMaterial, edgeMaterial, edgeMaterial, edgeMaterial, material, material];
-                        if (isNew) tileMesh.scale.set(0.8, 0.8, 0.8);
-                    }
-                }
-            );
+            return new THREE.MeshStandardMaterial({ 
+                map: texture, 
+                bumpMap: bumpTexture, 
+                bumpScale: 0.15, 
+                roughness: 0.3,
+                metalness: 0.1
+            });
         }
 
-        // 触发四角耦合对称动画
+        // 重置成一块完整瓷砖
+        function resetToSingleTile(imageName) {
+            while(tileGroup.children.length > 0){ 
+                tileGroup.remove(tileGroup.children[0]); 
+            }
+            tileGroup.rotation.set(0.1, 0, 0); // 重置旋转
+            
+            const textureLoader = new THREE.TextureLoader();
+            textureLoader.crossOrigin = 'Anonymous'; 
+            textureLoader.load(imageName, function(texture) {
+                const geometry = new THREE.BoxGeometry(3, 3, 0.2); 
+                const mat = getMaterial(texture);
+                const edgeMat = new THREE.MeshStandardMaterial({ color: 0xf0f0f0, roughness: 0.8 });
+                const mesh = new THREE.Mesh(geometry, [edgeMat, edgeMat, edgeMat, edgeMat, mat, mat]);
+                tileGroup.add(mesh);
+            });
+        }
+
+        // 核心动画：触发碎片飞散与重组
         function triggerRebuild() {
             if (isAnimating || !currentImage) return;
             isAnimating = true;
@@ -463,75 +430,91 @@
             const statusText = document.getElementById('btn-status');
             btn.disabled = true;
             
-            // 1. 视觉准备：暂停并转到正面，放大漂浮
-            if(tileMesh) {
-                tileMesh.rotation.y = 0;
-                tileMesh.rotation.x = 0.1;
-                targetScale = 1.15; // 触发呼吸放大
-            }
+            // 暂停自转并转到正面
+            tileGroup.rotation.set(0.1, 0, 0);
 
-            statusText.innerText = "✂️ 正在拆分四角象限碎片...";
-
-            const img = new Image();
-            img.crossOrigin = "Anonymous";
-            img.src = currentImage;
-            
-            img.onload = function() {
+            const textureLoader = new THREE.TextureLoader();
+            textureLoader.crossOrigin = 'Anonymous'; 
+            textureLoader.load(currentImage, function(texture) {
+                
+                // 1. 清空当前模型，准备生成 4 个碎块
+                while(tileGroup.children.length > 0){ tileGroup.remove(tileGroup.children[0]); }
+                
+                // 2. 获取原图并切成 4 块画布
                 const canvas = document.createElement('canvas');
-                canvas.width = 512; canvas.height = 512;
                 const ctx = canvas.getContext('2d');
-                const w = img.width / 2;
-                const h = img.height / 2;
+                const w = texture.image.width / 2;
+                const h = texture.image.height / 2;
+                canvas.width = w; canvas.height = h;
 
-                // 🌟 严谨的四方连续对称算法
-                // 通过特定变换，打乱后拼接能保证四面无限延伸时依然无缝。
-                const patterns = [
-                    [[0,0], [w,0], [0,h], [w,h]], // 1. 原图
-                    [[w,0], [0,0], [w,h], [0,h]], // 2. 水平镜像互换
-                    [[0,h], [w,h], [0,0], [w,0]], // 3. 垂直镜像互换
-                    [[w,h], [0,h], [w,0], [0,0]]  // 4. 中心对称互换
+                const pieceData = [
+                    { sx: 0, sy: 0, ox: -0.75, oy: 0.75 }, // 左上
+                    { sx: w, sy: 0, ox: 0.75, oy: 0.75 },  // 右上
+                    { sx: 0, sy: h, ox: -0.75, oy: -0.75 },// 左下
+                    { sx: w, sy: h, ox: 0.75, oy: -0.75 }  // 右下
                 ];
-                const p = patterns[Math.floor(Math.random() * patterns.length)];
 
-                // 延迟 0.8 秒，展示放大呼吸效果
-                setTimeout(() => {
-                    statusText.innerText = "🔄 执行角耦合矩阵运算...";
+                // 严谨的四方连续对称算法变换
+                const patterns = [
+                    [0, 1, 2, 3], // 原图不变
+                    [1, 0, 3, 2], // 水平互换
+                    [2, 3, 0, 1], // 垂直互换
+                    [3, 2, 1, 0]  // 中心对称互换
+                ];
+                const currentPattern = patterns[Math.floor(Math.random() * patterns.length)];
 
-                    // 绘制新对称贴图
-                    ctx.drawImage(img, p[0][0], p[0][1], w, h, 0, 0, 256, 256);
-                    ctx.drawImage(img, p[1][0], p[1][1], w, h, 256, 0, 256, 256);
-                    ctx.drawImage(img, p[2][0], p[2][1], w, h, 0, 256, 256, 256);
-                    ctx.drawImage(img, p[3][0], p[3][1], w, h, 256, 256, 256, 256);
+                const pieces = [];
+                let loadedCount = 0;
 
-                    const newTexture = new THREE.CanvasTexture(canvas);
+                pieceData.forEach((p, index) => {
+                    ctx.clearRect(0, 0, w, h);
+                    ctx.drawImage(texture.image, p.sx, p.sy, w, h, 0, 0, w, h);
+                    const pieceTex = new THREE.CanvasTexture(canvas);
                     
-                    // 同步生成灰度浮雕
-                    const bumpCanvas = document.createElement('canvas');
-                    bumpCanvas.width = 512; bumpCanvas.height = 512;
-                    const bctx = bumpCanvas.getContext('2d');
-                    bctx.drawImage(canvas, 0, 0);
-                    const bImgData = bctx.getImageData(0, 0, 512, 512);
-                    const bData = bImgData.data;
-                    for (let i = 0; i < bData.length; i += 4) {
-                        const avg = (bData[i] + bData[i+1] + bData[i+2]) / 3;
-                        bData[i] = avg; bData[i+1] = avg; bData[i+2] = avg; 
-                    }
-                    bctx.putImageData(bImgData, 0, 0);
-                    const newBump = new THREE.CanvasTexture(bumpCanvas);
+                    const geometry = new THREE.BoxGeometry(1.5, 1.5, 0.2);
+                    const mat = getMaterial(pieceTex);
+                    const edgeMat = new THREE.MeshStandardMaterial({ color: 0xf0f0f0, roughness: 0.8 });
+                    const mesh = new THREE.Mesh(geometry, [edgeMat, edgeMat, edgeMat, edgeMat, mat, mat]);
+                    
+                    // 初始位置在中心（拼合状态）
+                    mesh.position.set(p.ox, p.oy, 0);
+                    mesh.userData = { targetX: p.ox, targetY: p.oy, index: index };
+                    tileGroup.add(mesh);
+                    pieces.push(mesh);
+                    
+                    loadedCount++;
+                    if(loadedCount === 4) startExplodeAnimation(pieces, currentPattern);
+                });
+            });
+        }
 
-                    const newMaterial = new THREE.MeshStandardMaterial({ 
-                        map: newTexture, 
-                        bumpMap: newBump, 
-                        bumpScale: 0.15, 
-                        roughness: 0.3,
-                        metalness: 0.1
-                    });
+        function startExplodeAnimation(pieces, pattern) {
+            const statusText = document.getElementById('btn-status');
+            statusText.innerText = "💥 正在解构四角碎片...";
 
-                    if (tileMesh) {
-                        const edgeMaterial = new THREE.MeshStandardMaterial({ color: 0xf0f0f0, roughness: 0.8 });
-                        tileMesh.material = [edgeMaterial, edgeMaterial, edgeMaterial, edgeMaterial, newMaterial, newMaterial];
-                    }
+            let progress = 0;
+            const explodeAnim = setInterval(() => {
+                progress += 0.05;
+                pieces.forEach(mesh => {
+                    // 碎片向外扩散，并稍微拉开 Z 轴距离
+                    mesh.position.x += (mesh.userData.targetX > 0 ? 0.15 : -0.15);
+                    mesh.position.y += (mesh.userData.targetY > 0 ? 0.15 : -0.15);
+                    mesh.position.z += 0.05;
+                    mesh.rotation.z += (mesh.userData.index % 2 === 0 ? 0.05 : -0.05);
+                });
 
-                    // 视觉展示：合拢
-                    statusText.innerText = "✨ 重组完成！恢复四方连续旋转。";
-                    targetScale = 1.0; // 触发缩小回原
+                if (progress >= 1) {
+                    clearInterval(explodeAnim);
+                    // 散开后，开始交换位置
+                    startRecombineAnimation(pieces, pattern);
+                }
+            }, 30);
+        }
+
+        function startRecombineAnimation(pieces, pattern) {
+            const statusText = document.getElementById('btn-status');
+            statusText.innerText = "🔄 执行角耦合矩阵重组...";
+
+            // 获取四个原始角的位置
+            const posMap = [
+                {x: -0.75, y
