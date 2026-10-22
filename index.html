@@ -172,36 +172,12 @@
         function closeIntro() { document.getElementById('intro-modal').style.display = 'none'; }
 
         const tileData = [
-            { 
-                title: "锦鸡玉兰 · 四角合花", image: "1.jpg", 
-                desc: "提取传统娘惹瓷中最经典的翠绿基调与粉彩描金技法。本件采用“角耦合”设计逻辑，将画面解构为四个象限。正序拼合时，一对锦鸡在中心形成完美的镜像对称，长尾交织，四周环绕着洁白的玉兰与繁茂的枝蔓。锦鸡象征“锦绣前程”，玉兰代表“玉堂富贵”，两者结合，寓意家业兴旺、满堂生辉。通过数字重构，使传统南洋花鸟图纹具备了现代拼图般的解构美学。",
-                工艺: "粉彩平涂 · 矩阵切割重建", 纹样: "锦绣满堂（一对锦鸡 + 折枝玉兰 + 缠枝藤蔓）", 形制: "四角耦合重组 · 实现四方连续延伸", 寓意: "锦绣前程 · 玉堂富贵" 
-            },
-            { 
-                title: "凤穿牡丹 · 蝶恋花境", image: "2.jpg", 
-                desc: "娘惹瓷嫁妆器物最具标志性的经典题材。画面中央，一对凤凰双翼舒展，尾羽如孔雀般华丽下垂，与四周肥厚饱满的牡丹花交相辉映。作品巧妙融入了蝴蝶作为视觉引导线，形成“蝶恋花”的生动情境。四角的牡丹与凤凰的局部在中心交汇，取「凤穿牡丹」之意。寓意婚姻美满、富贵吉祥。本件通过数字算法重建了粉彩的温润光泽，完美呈现了南洋峇峇娘惹文化的繁复与华丽。",
-                工艺: "粉彩描金 · 数字多维度重建", 纹样: "凤穿牡丹（对称双凤 + 重瓣牡丹 + 彩蝶点缀）", 形制: "四角中心对称 · 无界四方连续铺贴", 寓意: "富贵呈祥 · 百年好合" 
-            },
-            { 
-                title: "仙鹤秋菊 · 祥云开光", image: "3.jpg", 
-                desc: "以经典娘惹瓷绿为底色，中心描绘一只展翅高飞的仙鹤，四周辅以红黄相间的繁盛秋菊与如意祥云。仙鹤在正中心形成完美的轴对称，须弥座般的菊花开光框定四周，极具神圣感与仪式感。作为传统婚嫁与寿诞的常用纹样，“仙鹤+秋菊”取“鹤寿延年”之意，象征长寿与安康。本件利用角耦合原理，将整体图纹巧妙地散布在四个象限，切割重排后依然能形成万花筒般的视觉张力。",
-                工艺: "粉彩渲染 · 数字重构", 纹样: "鹤寿延年（展翅仙鹤 + 重瓣秋菊 + 如意祥云）", 形制: "十字开光解构 · 突破圆盘局限", 寓意: "长寿安康 · 吉祥如意" 
-            },
-            { 
-                title: "喜上梅梢 · 四方连缀", image: "4.jpg", 
-                desc: "不同于常见的深色釉底，此款以温润的米白为地。画面采用十字对称布局，四只蓝白相间的喜鹊两两对望、轻盈立于折枝梅花之上，身姿灵动。角隅处点缀红蓝相间的硕大牡丹与卷草纹，色彩明快。整体取「喜上眉梢」之美意，构图疏密有致，尽显东方花鸟画的雅趣。本件采用高精度数字建模，重现传统粉彩的细腻线条，表面辅以微浮雕与亮釉质感渲染，使古典瓷面焕发新生。",
-                工艺: "高清数字复刻 · 粉彩渲染", 纹样: "折枝梅鹊（四只蓝白喜鹊 + 粉彩折枝梅花）", 形制: "角耦合阵列 · 无限拼接的十字对称拼花", 寓意: "喜上眉梢 · 春意盎然" 
-            },
-            { 
-                title: "喜鹊报春 · 菱花团花", image: "5.jpg", 
-                desc: "作为娘惹嫁妆瓷器中的经典之作，此件作品以深邃孔雀绿为地。画面正中构筑端庄的几何菱形花簇，四只蓝白相间的喜鹊灵动环绕，穿梭栖息于繁茂的缠枝牡丹之间。整幅图景不仅传递出“四喜临门”与“花开富贵”的吉祥祈愿，更寄托了婚姻美满、家族昌盛的祝福。工艺上，将平面纹样重塑为立体浮雕，并以清漆涂层逼真还原了传统粉彩的温润光泽。",
-                工艺: "粉彩浮雕 · 三维数字复原", 纹样: "喜鹊登枝（四只蓝白喜鹊 + 缠枝牡丹）", 形制: "几何菱花耦合 · 适配大面积矩阵铺贴", 寓意: "四喜临门 · 花开富贵" 
-            },
-            { 
-                title: "锦鲤穿花 · 十字团花", image: "6.jpg", 
-                desc: "娘惹瓷嫁妆器物的经典题材。画面以温润白釉为地，四尾红鲤灵动游弋于蓝色水波与绿意之间，四角点缀肥厚饱满的粉彩牡丹，配以清雅荷花。取「连年有余」与「花开富贵」之意，寓意家业丰盈、婚姻美满。本件通过数字重建重塑纹样层次，表面施以浮雕与清漆亮釉，完美复现传统粉彩瓷器的温润触感与立体光影。",
-                工艺: "数字重建 · 浮雕覆釉", 纹样: "锦鲤水波（四尾红锦鲤 + 重瓣牡丹与荷花）", 形制: "四角连续变换 · 现代建筑无缝铺贴应用", 寓意: "连年有余 · 富贵绵长" 
-            }
+            { title: "锦鸡玉兰 · 四角合花", image: "1.jpg", desc: "...", 工艺: "粉彩平涂 · 矩阵切割重建", 纹样: "锦绣满堂（一对锦鸡 + 折枝玉兰 + 缠枝藤蔓）", 形制: "四角耦合重组 · 实现四方连续延伸", 寓意: "锦绣前程 · 玉堂富贵" },
+            { title: "凤穿牡丹 · 蝶恋花境", image: "2.jpg", desc: "...", 工艺: "粉彩描金 · 数字多维度重建", 纹样: "凤穿牡丹（对称双凤 + 重瓣牡丹 + 彩蝶点缀）", 形制: "四角中心对称 · 无界四方连续铺贴", 寓意: "富贵呈祥 · 百年好合" },
+            { title: "仙鹤秋菊 · 祥云开光", image: "3.jpg", desc: "...", 工艺: "粉彩渲染 · 数字重构", 纹样: "鹤寿延年（展翅仙鹤 + 重瓣秋菊 + 如意祥云）", 形制: "十字开光解构 · 突破圆盘局限", 寓意: "长寿安康 · 吉祥如意" },
+            { title: "喜上梅梢 · 四方连缀", image: "4.jpg", desc: "...", 工艺: "高清数字复刻 · 粉彩渲染", 纹样: "折枝梅鹊（四只蓝白喜鹊 + 粉彩折枝梅花）", 形制: "角耦合阵列 · 无限拼接的十字对称拼花", 寓意: "喜上眉梢 · 春意盎然" },
+            { title: "喜鹊报春 · 菱花团花", image: "5.jpg", desc: "...", 工艺: "粉彩浮雕 · 三维数字复原", 纹样: "喜鹊登枝（四只蓝白喜鹊 + 缠枝牡丹）", 形制: "几何菱花耦合 · 适配大面积矩阵铺贴", 寓意: "四喜临门 · 花开富贵" },
+            { title: "锦鲤穿花 · 十字团花", image: "6.jpg", desc: "...", 工艺: "数字重建 · 浮雕覆釉", 纹样: "锦鲤水波（四尾红锦鲤 + 重瓣牡丹与荷花）", 形制: "四角连续变换 · 现代建筑无缝铺贴应用", 寓意: "连年有余 · 富贵绵长" }
         ];
 
         const cabinetView = document.getElementById('cabinet-view');
@@ -246,20 +222,28 @@
             build3DCabinet();
             showScene.add(cabinetGroup);
 
-            // 鼠标拖拽全方位查看展柜
+            // 鼠标拖拽旋转相机视角（柜子本身不转）
             let isDraggingShow = false;
             let prevMouse = { x: 0, y: 0 };
+            let camAngle = 0;
+            
             container.addEventListener('mousedown', (e) => { isDraggingShow = true; prevMouse = { x: e.clientX, y: e.clientY }; });
             window.addEventListener('mouseup', () => { isDraggingShow = false; });
             window.addEventListener('mousemove', (e) => {
                 if(!isDraggingShow) return;
                 const dx = e.clientX - prevMouse.x;
-                const dy = e.clientY - prevMouse.y;
-                cabinetGroup.rotation.y += dx * 0.01;
-                cabinetGroup.rotation.x += dy * 0.01;
+                camAngle -= dx * 0.005;
+                // 限制旋转角度，不让看穿背面
+                if(camAngle > 0.5) camAngle = 0.5;
+                if(camAngle < -0.5) camAngle = -0.5;
+                
+                showCamera.position.x = 18 * Math.sin(camAngle);
+                showCamera.position.z = 18 * Math.cos(camAngle);
+                showCamera.lookAt(0, 1, 0);
+                
                 prevMouse = { x: e.clientX, y: e.clientY };
             });
-            // 手机端触摸拖拽
+            // 手机端
             container.addEventListener('touchstart', (e) => {
                 isDraggingShow = true; prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
             }, { passive: false });
@@ -268,9 +252,14 @@
                 if(!isDraggingShow) return;
                 e.preventDefault();
                 const dx = e.touches[0].clientX - prevMouse.x;
-                const dy = e.touches[0].clientY - prevMouse.y;
-                cabinetGroup.rotation.y += dx * 0.01;
-                cabinetGroup.rotation.x += dy * 0.01;
+                camAngle -= dx * 0.005;
+                if(camAngle > 0.5) camAngle = 0.5;
+                if(camAngle < -0.5) camAngle = -0.5;
+                
+                showCamera.position.x = 18 * Math.sin(camAngle);
+                showCamera.position.z = 18 * Math.cos(camAngle);
+                showCamera.lookAt(0, 1, 0);
+                
                 prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
             }, { passive: false });
 
@@ -282,7 +271,7 @@
         }
 
         function build3DCabinet() {
-            // 1. 实木柜身材质 (拿铁色)
+            // 1. 实木柜身材质
             const woodMat = new THREE.MeshStandardMaterial({ color: 0xd4a373, roughness: 0.8, metalness: 0.1 });
             const darkWoodMat = new THREE.MeshStandardMaterial({ color: 0x8b5a2b, roughness: 0.9 });
             
@@ -320,30 +309,28 @@
                 });
             });
 
-            // 3. 真实的 3D 雕花双开门
-            const doorMatOuter = new THREE.MeshStandardMaterial({ color: 0xe6cca7, roughness: 0.7 }); // 门外侧底色
-            const doorMatInner = new THREE.MeshStandardMaterial({ color: 0x8b5a2b, roughness: 0.9 }); // 门内侧纯木色
+            // 3. 真实的 3D 雕花双开门（带正确的铰链轴心）
+            const doorMatOuter = new THREE.MeshStandardMaterial({ color: 0xe6cca7, roughness: 0.7 });
+            const doorMatInner = new THREE.MeshStandardMaterial({ color: 0x8b5a2b, roughness: 0.9 });
             
             const doorWidth = 4.2;
             const doorHeight = 12.8;
 
-            // 左门组
+            // --- 左门 ---
             leftDoorGroup = new THREE.Group();
-            leftDoorGroup.position.set(-4.2, 0, 2.2); // 铰链在左侧
+            // 铰链放在左侧最边缘，z轴放在柜子最前面
+            leftDoorGroup.position.set(-4.2, 0, 2.3); 
 
-            // 左侧门板 (外侧贴图/内侧纯木)
-            const leftDoorGeo = new THREE.BoxGeometry(doorWidth, doorHeight, 0.3);
-            leftDoorGeo.translate(doorWidth/2, 0, 0); // 将几何体中心偏移，让轴心在左边缘
-            
-            // 材质数组：[右, 左, 上, 下, 前, 后]
-            // 我们用 Canvas 画一个粉色拱形花纹贴在前面(外侧)，后面(内侧)用纯深木色
+            // 门板几何体，向右平移一半，让旋转轴心刚好在左侧
+            const leftDoorGeo = new THREE.BoxGeometry(doorWidth, doorHeight, 0.2);
+            leftDoorGeo.translate(doorWidth/2, 0, 0); 
+
+            // 门外侧花纹
             const leftCanvas = document.createElement('canvas');
             leftCanvas.width = 256; leftCanvas.height = 1024;
             const lctx = leftCanvas.getContext('2d');
             lctx.fillStyle = '#e6cca7'; lctx.fillRect(0, 0, 256, 1024);
-            // 画粉色边框
             lctx.strokeStyle = '#f7d1d5'; lctx.lineWidth = 20; lctx.strokeRect(30, 30, 196, 964);
-            // 画一些碎花(用简单的圆代替)
             lctx.fillStyle = '#a8d5ba';
             for(let i=0; i<10; i++) {
                 lctx.beginPath(); lctx.arc(60 + Math.random()*130, 100 + Math.random()*800, 10, 0, Math.PI*2); lctx.fill();
@@ -353,17 +340,17 @@
 
             const leftDoorMesh = new THREE.Mesh(leftDoorGeo, [
                 darkWoodMat, darkWoodMat, darkWoodMat, darkWoodMat, 
-                leftFaceMat, // 外侧有花
-                doorMatInner // 内侧纯木色
+                leftFaceMat,  // 门外侧（前）
+                doorMatInner  // 门内侧（后，纯木色无花纹）
             ]);
             leftDoorGroup.add(leftDoorMesh);
             cabinetGroup.add(leftDoorGroup);
 
-            // 右门组
+            // --- 右门 ---
             rightDoorGroup = new THREE.Group();
-            rightDoorGroup.position.set(4.2, 0, 2.2); // 铰链在右侧
+            rightDoorGroup.position.set(4.2, 0, 2.3); 
 
-            const rightDoorGeo = new THREE.BoxGeometry(doorWidth, doorHeight, 0.3);
+            const rightDoorGeo = new THREE.BoxGeometry(doorWidth, doorHeight, 0.2);
             rightDoorGeo.translate(-doorWidth/2, 0, 0); 
 
             const rightCanvas = document.createElement('canvas');
@@ -380,8 +367,8 @@
 
             const rightDoorMesh = new THREE.Mesh(rightDoorGeo, [
                 darkWoodMat, darkWoodMat, darkWoodMat, darkWoodMat, 
-                rightFaceMat, // 外侧有花
-                doorMatInner // 内侧纯木色
+                rightFaceMat, // 门外侧
+                doorMatInner  // 门内侧
             ]);
             rightDoorGroup.add(rightDoorMesh);
             cabinetGroup.add(rightDoorGroup);
@@ -397,13 +384,13 @@
                 btn.innerText = "🚪 关闭展柜";
                 isOpened = true;
                 
-                // 真实的 3D 铰链开门动画
+                // 真实的 3D 开门动画 (向外推开)
                 let rot = 0;
                 const openAnim = setInterval(() => {
-                    rot += 0.03;
-                    if(rot >= Math.PI / 2) { clearInterval(openAnim); rot = Math.PI / 2; }
-                    leftDoorGroup.rotation.y = rot;   // 左门向左转
-                    rightDoorGroup.rotation.y = -rot; // 右门向右转
+                    rot += 0.04;
+                    if(rot >= Math.PI / 2.2) { clearInterval(openAnim); rot = Math.PI / 2.2; }
+                    leftDoorGroup.rotation.y = rot;   
+                    rightDoorGroup.rotation.y = -rot; 
                 }, 20);
 
             } else {
@@ -411,9 +398,10 @@
                 btn.innerText = "✨ 开启展柜";
                 isOpened = false;
                 
-                let rot = Math.PI / 2;
+                // 关门动画
+                let rot = Math.PI / 2.2;
                 const closeAnim = setInterval(() => {
-                    rot -= 0.03;
+                    rot -= 0.04;
                     if(rot <= 0) { clearInterval(closeAnim); rot = 0; }
                     leftDoorGroup.rotation.y = rot;
                     rightDoorGroup.rotation.y = -rot;
@@ -671,7 +659,6 @@
         // 初始化入口
         window.onload = function() {
             initShowcase();
-            // 首屏不需要渲染3D瓷砖页面，等用户点击时在 openDetail 里面调用 init3D
         };
     </script>
 </body>
