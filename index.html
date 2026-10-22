@@ -88,10 +88,10 @@
             border-color: #fff; z-index: 10;
         }
 
-        /* === 🚪 3D 实木门 + 完美透视玻璃 === */
+        /* === 🚪 100%透视的玻璃门 === */
         .glass-door {
             position: absolute; top: 0; height: 100%; width: 50%;
-            /* 厚实的实木门框 */
+            /* 门框保留深色木纹 */
             background: linear-gradient(180deg, #d4a373 0%, #c18e5a 100%);
             border: 16px solid #8b5a2b; 
             box-shadow: inset 0 0 0 2px #d4af37, 0 10px 30px rgba(0,0,0,0.4);
@@ -101,18 +101,18 @@
             transform-style: preserve-3d;
         }
         
-        /* 中间的玻璃区域：不用 backdrop-filter 防止死白，用半透明渐变 */
+        /* 中间部分用极淡的高光和一条斜线模拟真实玻璃 */
         .glass-door::after {
             content: ''; 
             position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
-            /* 稍微带一点暖金色调的极透明反光 */
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.0) 40%, rgba(212, 175, 55, 0.1) 100%);
-            border: 2px solid #8b5a2b;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.1);
+            /* 玻璃反光特效：左上角亮白，中间透明，右下角微亮 */
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 30%, rgba(255, 255, 255, 0.0) 50%, rgba(255, 255, 255, 0.1) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            border-radius: 2px;
             backface-visibility: hidden;
         }
 
-        /* 门内侧纯木色（开门后旋转过去的一面） */
+        /* 门内侧纯木色 */
         .glass-door::before {
             content: ''; 
             position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
