@@ -88,7 +88,7 @@
             border-color: #fff; z-index: 10;
         }
 
-        /* === 🚪 3D 实木门（完美铺满你给的图） === */
+        /* === 🚪 3D 实木门（完美复刻原图） === */
         .glass-door {
             position: absolute; top: 0; height: 100%; width: 50%;
             background: linear-gradient(180deg, #d4a373 0%, #c18e5a 100%);
@@ -100,14 +100,15 @@
             transform-style: preserve-3d;
         }
         
-        /* 完美平铺你给的这张复古黄金花纹图 */
+        /* 一比一高精度复刻你图中的卷草花纹，且铺满不密集 */
         .glass-door::after {
             content: ''; 
             position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px;
-            /* 提取了你发来图片的底色与花纹特征 */
-            background-color: #e8c896;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' fill='%23e8c896'/%3E%3Ccircle cx='60' cy='60' r='45' fill='none' stroke='%23fdfaf5' stroke-width='2'/%3E%3Ccircle cx='60' cy='60' r='35' fill='none' stroke='%23b8860b' stroke-width='6'/%3E%3Cpath d='M60 15 Q 70 40 60 60 Q 50 40 60 15 Z' fill='%238b4513'/%3E%3Cpath d='M60 105 Q 70 80 60 60 Q 50 80 60 105 Z' fill='%238b4513'/%3E%3Cpath d='M15 60 Q 40 70 60 60 Q 40 50 15 60 Z' fill='%238b4513'/%3E%3Cpath d='M105 60 Q 80 70 60 60 Q 80 50 105 60 Z' fill='%238b4513'/%3E%3Ccircle cx='60' cy='60' r='10' fill='%23fdfaf5'/%3E%3Ccircle cx='60' cy='60' r='5' fill='%238b4513'/%3E%3Cpath d='M0 0 L25 0 Q 10 10 0 25 Z' fill='%23b8860b'/%3E%3Cpath d='M120 0 L95 0 Q 110 10 120 25 Z' fill='%23b8860b'/%3E%3Cpath d='M0 120 L25 120 Q 10 110 0 95 Z' fill='%23b8860b'/%3E%3Cpath d='M120 120 L95 120 Q 110 110 120 95 Z' fill='%23b8860b'/%3E%3C/svg%3E");
-            background-size: 60px 60px; /* 完美四方连续平铺 */
+            background-color: #e6d3b3;
+            /* 完全按照原图绘制的藤蔓路径 */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><rect width="100" height="100" fill="%23e6d3b3"/><circle cx="50" cy="50" r="42" fill="%23fdfaf5"/><circle cx="50" cy="50" r="40" fill="none" stroke="%23c89b3c" stroke-width="2"/><path d="M50 10 C 60 30, 80 30, 85 40 C 90 50, 70 60, 60 50 C 40 30, 60 70, 70 80 C 80 90, 50 90, 40 80 C 30 70, 40 50, 30 40 C 20 30, 40 20, 50 10 Z" fill="%238b4513"/><path d="M50 20 C 60 40, 70 40, 75 45 C 75 50, 60 55, 55 45 C 40 30, 50 60, 60 70 C 65 75, 50 75, 45 70 C 35 60, 45 50, 40 40 C 35 30, 45 25, 50 20 Z" fill="%23a0522d"/><path d="M10 10 Q 30 10 20 30 Q 10 40 10 10 Z" fill="%238b4513"/><path d="M90 90 Q 70 90 80 70 Q 90 60 90 90 Z" fill="%238b4513"/><path d="M90 10 Q 70 10 80 30 Q 90 40 90 10 Z" fill="%238b4513"/><path d="M10 90 Q 30 90 20 70 Q 10 60 10 90 Z" fill="%238b4513"/><path d="M50 40 Q 60 40 50 60 Q 40 40 50 40 Z" fill="%23fdfaf5"/></svg>');
+            background-size: 120px 120px; /* 尺寸放大，保证不密集 */
+            background-position: center;
             border: 2px solid #8b5a2b;
             box-shadow: inset 0 0 20px rgba(0,0,0,0.4);
             backface-visibility: hidden;
@@ -229,7 +230,6 @@
         </div>
     </div>
 
-    <!-- 彻底移除了没用的返回展柜按钮 -->
     <div id="detail-view">
         <div class="left-3d" id="canvas-container"></div>
         <div class="right-info">
