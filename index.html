@@ -144,12 +144,12 @@
             <p style="color: #4a3324; font-size: 15px; line-height: 1.8; margin-bottom: 10px; text-align: justify; text-indent: 2em;">
                 <b>娘惹瓷</b>是19—20世纪南洋峇峇娘惹族群在景德镇定制的粉彩外销瓷，纹样融合中华传统吉祥图案与南洋本土审美，是娘惹跨文化视觉符号的典型载体。
             </p>
-            <p style="color: #888样; font-size: 12px，; margin-bottom: 15px; text向-align: right;">
+            <p style="color: #888; font-size: 12px; margin-bottom: 15px; text-align: right;">
                 参考文献：张菡夏,陆芳芳.从娘惹瓷看马来西亚华人文化转型[J].陶瓷研究,2024,39(02):112-115.
             </p>
 
             <p style="color: #4a3324; font-size: 15px; line-height: 1.8; margin-bottom: 10px; text-align: justify; text-indent: 2em;">
-                <b>四方连续</b>是以一个或一组单位纹上下左右四个方向规律重复排布、能够无限延展的面状装饰构图，分为散点式、连缀式、重叠式等骨骼类型。
+                <b>四方连续</b>是以一个或一组单位纹样，向上下左右四个方向规律重复排布、能够无限延展的面状装饰构图，分为散点式、连缀式、重叠式等骨骼类型。
             </p>
             <p style="color: #888; font-size: 12px; margin-bottom: 25px; text-align: right;">
                 参考文献：李海峰.基础图案[M].上海:东华大学出版社,2016.
@@ -271,7 +271,7 @@
         let isAnimating = false; 
         let isDragging = false; 
         
-        // 用于动画的变量
+        // 用于平滑缩放的变量
         let targetScale = 1;
 
         function renderCabinet() {
@@ -399,12 +399,11 @@
                 requestAnimationFrame(animate);
                 
                 if (tileMesh) {
-                    // 如果在拖拽或者动画中，不自动旋转
                     if (!isDragging && !isAnimating) {
                         tileMesh.rotation.y += 0.005; 
                     }
                     
-                    // 平滑处理缩放动画（呼吸感）
+                    // 平滑的放大缩小呼吸动画
                     let currentScale = tileMesh.scale.x;
                     if (Math.abs(currentScale - targetScale) > 0.01) {
                         let newScale = currentScale + (targetScale - currentScale) * 0.15;
@@ -455,7 +454,7 @@
             );
         }
 
-        // 触发四角耦合动画
+        // 触发四角耦合对称动画
         function triggerRebuild() {
             if (isAnimating || !currentImage) return;
             isAnimating = true;
@@ -464,11 +463,11 @@
             const statusText = document.getElementById('btn-status');
             btn.disabled = true;
             
-            // 1. 暂停并转到正面，放大漂浮
+            // 1. 视觉准备：暂停并转到正面，放大漂浮
             if(tileMesh) {
                 tileMesh.rotation.y = 0;
                 tileMesh.rotation.x = 0.1;
-                targetScale = 1.15; // 放大呼吸感
+                targetScale = 1.15; // 触发呼吸放大
             }
 
             statusText.innerText = "✂️ 正在拆分四角象限碎片...";
@@ -485,20 +484,20 @@
                 const h = img.height / 2;
 
                 // 🌟 严谨的四方连续对称算法
-                // 只有这种变换，才能让打乱后的拼图在四面无限延伸时依然完美无缝。
+                // 通过特定变换，打乱后拼接能保证四面无限延伸时依然无缝。
                 const patterns = [
-                    [[0,0], [w,0], [0,h], [w,h]], // 1. 原图 (上下左右对称)
-                    [[w,0], [0,0], [w,h], [0,h]], // 2. 水平镜像互换 (左右拼合连续)
-                    [[0,h], [w,h], [0,0], [w,0]], // 3. 垂直镜像互换 (上下拼合连续)
-                    [[w,h], [0,h], [w,0], [0,0]]  // 4. 中心对称互换 (角对角完美耦合)
+                    [[0,0], [w,0], [0,h], [w,h]], // 1. 原图
+                    [[w,0], [0,0], [w,h], [0,h]], // 2. 水平镜像互换
+                    [[0,h], [w,h], [0,0], [w,0]], // 3. 垂直镜像互换
+                    [[w,h], [0,h], [w,0], [0,0]]  // 4. 中心对称互换
                 ];
                 const p = patterns[Math.floor(Math.random() * patterns.length)];
 
-                // 延迟 0.8 秒，让观众看到放大，然后瞬间重组贴图
+                // 延迟 0.8 秒，展示放大呼吸效果
                 setTimeout(() => {
                     statusText.innerText = "🔄 执行角耦合矩阵运算...";
 
-                    // 绘制新贴图
+                    // 绘制新对称贴图
                     ctx.drawImage(img, p[0][0], p[0][1], w, h, 0, 0, 256, 256);
                     ctx.drawImage(img, p[1][0], p[1][1], w, h, 256, 0, 256, 256);
                     ctx.drawImage(img, p[2][0], p[2][1], w, h, 0, 256, 256, 256);
@@ -506,7 +505,7 @@
 
                     const newTexture = new THREE.CanvasTexture(canvas);
                     
-                    // 生成对应新图的灰度浮雕
+                    // 同步生成灰度浮雕
                     const bumpCanvas = document.createElement('canvas');
                     bumpCanvas.width = 512; bumpCanvas.height = 512;
                     const bctx = bumpCanvas.getContext('2d');
@@ -529,4 +528,10 @@
                     });
 
                     if (tileMesh) {
-                        const edgeMaterial = new THREE.MeshStandardMaterial({ color: 0xf0f0
+                        const edgeMaterial = new THREE.MeshStandardMaterial({ color: 0xf0f0f0, roughness: 0.8 });
+                        tileMesh.material = [edgeMaterial, edgeMaterial, edgeMaterial, edgeMaterial, newMaterial, newMaterial];
+                    }
+
+                    // 视觉展示：合拢
+                    statusText.innerText = "✨ 重组完成！恢复四方连续旋转。";
+                    targetScale = 1.0; // 触发缩小回原
